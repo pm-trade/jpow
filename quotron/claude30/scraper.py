@@ -204,6 +204,55 @@ def scrape_social(s: Shoal, tickers: list[str], max_per_ticker: int = 3) -> list
     return posts
 
 
+# --- StockTwits Discovery (trending tickers — minnow tier) ---
+
+@dataclass
+class TrendingTicker:
+    symbol: str = ""
+    title: str = ""
+    watchlist_count: int = 0
+    in_index: bool = False
+
+
+def scrape_trending(s: Shoal) -> list[TrendingTicker]:
+    """
+    Fetch trending tickers from StockTwits API.
+    Lightweight JSON — minnow tier. Useful for discovering tickers
+    that are getting attention but aren't in the Claude-30 yet.
+    """
+    try:
+        resp = s.fetch("https://api.stocktwits.com/api/2/trending/symbols.json",
+                       consumer="claude30-trending", agent_class="light")
+        data = resp.json()
+        return [
+            TrendingTicker(
+                symbol=sym.get("symbol", ""),
+                title=sym.get("title", ""),
+                watchlist_count=sym.get("watchlist_count", 0),
+                in_index=sym.get("symbol", "") in CLAUDE_30,
+            )
+            for sym in data.get("symbols", [])
+        ]
+    except (ShoalError, json.JSONDecodeError) as e:
+        print(f"  trending error: {e}")
+        return []
+
+
+def print_trending(tickers: list[TrendingTicker]):
+    if not tickers:
+        print("  no trending data")
+        return
+    for t in tickers[:15]:
+        flag = " [INDEX]" if t.in_index else ""
+        print(f"  ${t.symbol:6s} | watchers={t.watchlist_count:>6d} | {t.title[:40]}{flag}")
+
+    in_idx = sum(1 for t in tickers if t.in_index)
+    outside = [t for t in tickers if not t.in_index][:5]
+    print(f"\n  {in_idx}/{len(tickers)} trending are in Claude-30")
+    if outside:
+        print(f"  notable outside index: {', '.join(t.symbol for t in outside)}")
+
+
 # --- Helpers ---
 
 def extract_xml_tag(xml: str, tag: str) -> str:
@@ -252,7 +301,7 @@ def print_social(posts: list[SocialPost]):
 
 # --- Main ---
 
-def export_json(quotes, headlines, posts, outpath):
+def export_json(quotes, headlines, posts, outpath, trending=None):
     """Export all data to a JSON file for the GitHub Pages dashboard."""
     data = {
         "updated": datetime.now().isoformat(),
@@ -261,6 +310,7 @@ def export_json(quotes, headlines, posts, outpath):
         "quotes": [vars(q) for q in quotes],
         "news": [vars(h) for h in headlines],
         "social": [vars(p) for p in posts],
+        "trending": [vars(t) for t in (trending or [])],
     }
 
     os.makedirs(os.path.dirname(outpath), exist_ok=True)
@@ -274,6 +324,7 @@ def main():
     parser.add_argument("--quotes", action="store_true", help="scrape stock quotes")
     parser.add_argument("--news", action="store_true", help="scrape news headlines")
     parser.add_argument("--social", action="store_true", help="scrape reddit social posts")
+    parser.add_argument("--trending", action="store_true", help="scrape StockTwits trending")
     parser.add_argument("--all", action="store_true", help="scrape everything")
     parser.add_argument("--export", default="", help="export JSON to path (for GitHub Pages)")
     parser.add_argument("--shoal", default=SHOAL_URL, help="Shoal controller URL")
@@ -302,6 +353,7 @@ def main():
     all_quotes = []
     all_headlines = []
     all_posts = []
+    all_trending = []
 
     # --- Quotes ---
     if args.quotes or args.all:
@@ -332,9 +384,18 @@ def main():
         print_social(all_posts)
         print(f"\n  {len(all_posts)} posts for {len(top_tickers)} tickers in {dt:.1f}s")
 
+    # --- Trending ---
+    if args.trending or args.all:
+        print(f"\n--- Trending (StockTwits API → minnow) ---\n")
+        t0 = time.perf_counter()
+        all_trending = scrape_trending(s)
+        dt = time.perf_counter() - t0
+        print_trending(all_trending)
+        print(f"\n  {len(all_trending)} trending tickers in {dt:.1f}s")
+
     # --- Export ---
     if args.export:
-        export_json(all_quotes, all_headlines, all_posts, args.export)
+        export_json(all_quotes, all_headlines, all_posts, args.export, all_trending)
 
     print(f"\n{'='*60}")
     print(f"  done")
