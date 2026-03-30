@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-30T16:10:18.885787",
+  "updated": "2026-03-30T16:12:18.243898",
   "index": {
     "NVDA": {
       "name": "NVIDIA",
@@ -158,7 +158,7 @@
     "change_pct": -0.03,
     "high": 1000.66,
     "low": 991.91,
-    "points": 41,
+    "points": 42,
     "since": "2026-03-30T14:11:09.337714"
   },
   "sectors": {
@@ -171,49 +171,13 @@
   },
   "quotes": [
     {
-      "ticker": "AVGO",
-      "price": 293.41,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 26092349,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:17.729048"
-    },
-    {
       "ticker": "NVDA",
       "price": 165.17,
       "change": 0.0,
       "change_pct": 0.0,
       "volume": 174520223,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:17.730785"
-    },
-    {
-      "ticker": "AMD",
-      "price": 196.04,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 39668676,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:17.811226"
-    },
-    {
-      "ticker": "AMZN",
-      "price": 200.95,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 42710345,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:17.824851"
-    },
-    {
-      "ticker": "MSFT",
-      "price": 358.96,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 40955126,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:17.939621"
+      "timestamp": "2026-03-30T16:12:16.927550"
     },
     {
       "ticker": "INTC",
@@ -222,7 +186,34 @@
       "change_pct": 0.0,
       "volume": 79948901,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:17.952913"
+      "timestamp": "2026-03-30T16:12:17.102083"
+    },
+    {
+      "ticker": "AMZN",
+      "price": 200.95,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 42710345,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:17.197369"
+    },
+    {
+      "ticker": "MSFT",
+      "price": 358.96,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 40955126,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:17.359616"
+    },
+    {
+      "ticker": "AMD",
+      "price": 196.04,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 39668676,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:17.433319"
     },
     {
       "ticker": "GOOG",
@@ -231,16 +222,7 @@
       "change_pct": 0.0,
       "volume": 19790221,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.020943"
-    },
-    {
-      "ticker": "MU",
-      "price": 321.8,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 71731868,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.096753"
+      "timestamp": "2026-03-30T16:12:17.434497"
     },
     {
       "ticker": "META",
@@ -249,7 +231,7 @@
       "change_pct": 0.0,
       "volume": 21642890,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.123517"
+      "timestamp": "2026-03-30T16:12:17.505837"
     },
     {
       "ticker": "MRVL",
@@ -258,7 +240,7 @@
       "change_pct": 0.0,
       "volume": 20646721,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.127940"
+      "timestamp": "2026-03-30T16:12:17.521538"
     },
     {
       "ticker": "CRM",
@@ -267,7 +249,16 @@
       "change_pct": 0.0,
       "volume": 9386693,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.198273"
+      "timestamp": "2026-03-30T16:12:17.599071"
+    },
+    {
+      "ticker": "MU",
+      "price": 321.8,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 71731868,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:17.613891"
     },
     {
       "ticker": "PLTR",
@@ -276,7 +267,16 @@
       "change_pct": 0.0,
       "volume": 38488044,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.220264"
+      "timestamp": "2026-03-30T16:12:17.676820"
+    },
+    {
+      "ticker": "AVGO",
+      "price": 293.41,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 26092349,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:17.678563"
     },
     {
       "ticker": "SNOW",
@@ -285,7 +285,7 @@
       "change_pct": 0.0,
       "volume": 3227253,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.227370"
+      "timestamp": "2026-03-30T16:12:17.678955"
     },
     {
       "ticker": "MDB",
@@ -294,25 +294,7 @@
       "change_pct": 0.0,
       "volume": 1147966,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.293032"
-    },
-    {
-      "ticker": "ORCL",
-      "price": 138.78,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 15564012,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.340543"
-    },
-    {
-      "ticker": "CRWV",
-      "price": 69.15,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 25131206,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.391346"
+      "timestamp": "2026-03-30T16:12:17.748899"
     },
     {
       "ticker": "DDOG",
@@ -321,25 +303,25 @@
       "change_pct": 0.0,
       "volume": 5370736,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.403807"
+      "timestamp": "2026-03-30T16:12:17.776447"
     },
     {
-      "ticker": "CRWD",
-      "price": 380.06,
+      "ticker": "ORCL",
+      "price": 138.78,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 4172936,
+      "volume": 15564012,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.441232"
+      "timestamp": "2026-03-30T16:12:17.777253"
     },
     {
-      "ticker": "ALAB",
-      "price": 100.27,
+      "ticker": "CRWV",
+      "price": 69.15,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 5025542,
+      "volume": 25131206,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.498766"
+      "timestamp": "2026-03-30T16:12:17.836771"
     },
     {
       "ticker": "SMCI",
@@ -348,7 +330,16 @@
       "change_pct": 0.0,
       "volume": 32803546,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.510019"
+      "timestamp": "2026-03-30T16:12:17.855247"
+    },
+    {
+      "ticker": "ALAB",
+      "price": 100.27,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 5025542,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:17.907980"
     },
     {
       "ticker": "FTNT",
@@ -357,7 +348,16 @@
       "change_pct": 0.0,
       "volume": 6677164,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.542412"
+      "timestamp": "2026-03-30T16:12:17.929260"
+    },
+    {
+      "ticker": "CRWD",
+      "price": 380.06,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 4172936,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:17.932447"
     },
     {
       "ticker": "TSLA",
@@ -366,7 +366,7 @@
       "change_pct": 0.0,
       "volume": 64411027,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.592378"
+      "timestamp": "2026-03-30T16:12:17.984978"
     },
     {
       "ticker": "NET",
@@ -375,25 +375,7 @@
       "change_pct": 0.0,
       "volume": 3556112,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.605653"
-    },
-    {
-      "ticker": "ANET",
-      "price": 116.14,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 6146234,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.638086"
-    },
-    {
-      "ticker": "HPE",
-      "price": 22.6,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 16580060,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.697415"
+      "timestamp": "2026-03-30T16:12:17.996535"
     },
     {
       "ticker": "PATH",
@@ -402,7 +384,16 @@
       "change_pct": 0.0,
       "volume": 17600014,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.700301"
+      "timestamp": "2026-03-30T16:12:18.065738"
+    },
+    {
+      "ticker": "HPE",
+      "price": 22.6,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 16580060,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:18.071150"
     },
     {
       "ticker": "RKLB",
@@ -411,7 +402,7 @@
       "change_pct": 0.0,
       "volume": 21053975,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.729826"
+      "timestamp": "2026-03-30T16:12:18.133679"
     },
     {
       "ticker": "IONQ",
@@ -420,7 +411,16 @@
       "change_pct": 0.0,
       "volume": 16274770,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.792259"
+      "timestamp": "2026-03-30T16:12:18.136351"
+    },
+    {
+      "ticker": "ANET",
+      "price": 116.14,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 6146234,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T16:12:18.167609"
     },
     {
       "ticker": "DELL",
@@ -429,7 +429,7 @@
       "change_pct": 0.0,
       "volume": 7782034,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.832395"
+      "timestamp": "2026-03-30T16:12:18.206173"
     },
     {
       "ticker": "ISRG",
@@ -438,7 +438,7 @@
       "change_pct": 0.0,
       "volume": 1964575,
       "market_cap": 0,
-      "timestamp": "2026-03-30T16:10:18.881924"
+      "timestamp": "2026-03-30T16:12:18.237414"
     }
   ],
   "news": [],
