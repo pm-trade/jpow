@@ -18,6 +18,7 @@ Usage:
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -152,15 +153,18 @@ def scrape_news(s: Shoal, tickers: list[str], max_per_ticker: int = 3) -> list[H
 
                 title = extract_xml_tag(item_xml, "title")
                 source = extract_xml_tag(item_xml, "source")
-                link = extract_xml_tag(item_xml, "link")
                 pub_date = extract_xml_tag(item_xml, "pubDate")
+
+                # Extract source URL from <source url="..."> attribute
+                source_url_match = re.search(r'<source[^>]*url="([^"]+)"', item_xml)
+                source_url = source_url_match.group(1) if source_url_match else ""
 
                 if title:
                     items.append(Headline(
                         ticker=ticker,
                         title=title,
                         source=source,
-                        url=link,
+                        url=source_url,  # actual source domain, not Google redirect
                         timestamp=pub_date,
                     ))
             return items
@@ -331,6 +335,50 @@ def print_trending(tickers: list[TrendingTicker]):
     print(f"\n  {in_idx}/{len(tickers)} trending are in Claude-30")
     if outside:
         print(f"  notable outside index: {', '.join(t.symbol for t in outside)}")
+
+
+# --- Article Reader (minnow with lightpanda fallback) ---
+
+def read_article(s: Shoal, url: str, max_chars: int = 2000) -> str:
+    """
+    Fetch and extract readable text from a news article URL.
+    Tries minnow first (fast), falls back to lightpanda (JS rendering).
+    Returns clean text, not HTML.
+    """
+    if not url or "google.com" in url:
+        return ""
+
+    for agent_class in ["light", "heavy"]:
+        try:
+            resp = s.fetch(url, consumer="claude30-reader", agent_class=agent_class)
+
+            if resp.content_size < 500:
+                continue  # empty/blocked, try heavier agent
+
+            html = resp.html
+
+            # Remove script/style tags
+            html = re.sub(r'<(script|style|nav|header|footer)[^>]*>.*?</\1>', '', html, flags=re.DOTALL | re.IGNORECASE)
+
+            # Extract paragraphs
+            paragraphs = re.findall(r'<p[^>]*>(.*?)</p>', html, flags=re.DOTALL)
+            clean = []
+            for p in paragraphs:
+                text = re.sub(r'<[^>]+>', '', p).strip()
+                # Skip short lines, ads, nav elements
+                if len(text) > 60 and not any(kw in text.lower() for kw in [
+                    'click here', 'subscribe', 'sign up', 'newsletter', 'cookie',
+                    'advertisement', 'sponsored', 'affiliate', 'privacy policy',
+                ]):
+                    clean.append(text)
+
+            if clean:
+                return "\n\n".join(clean)[:max_chars]
+
+        except ShoalError:
+            continue
+
+    return ""
 
 
 # --- Helpers ---
