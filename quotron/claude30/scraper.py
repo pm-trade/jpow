@@ -64,6 +64,20 @@ class SocialPost:
     url: str = ""
 
 
+@dataclass
+class StockTwitsSentiment:
+    ticker: str
+    messages: int = 0
+    bullish: int = 0
+    bearish: int = 0
+    top_messages: list = field(default_factory=list)  # [{body, sentiment}]
+
+    @property
+    def ratio(self) -> float:
+        total = self.bullish + self.bearish
+        return self.bullish / total if total > 0 else 0.5
+
+
 # --- Quote Scraper (Yahoo Finance API — minnow tier) ---
 
 def scrape_quotes(s: Shoal, tickers: list[str]) -> list[Quote]:
@@ -204,6 +218,71 @@ def scrape_social(s: Shoal, tickers: list[str], max_per_ticker: int = 3) -> list
     return posts
 
 
+# --- StockTwits Sentiment (per-ticker stream — minnow tier) ---
+
+def scrape_stocktwits(s: Shoal, tickers: list[str]) -> list[StockTwitsSentiment]:
+    """
+    Fetch StockTwits message streams per ticker. Counts bullish/bearish
+    sentiment and captures top messages. Minnow tier — public JSON API.
+    """
+    results = []
+
+    def fetch_sentiment(ticker: str) -> StockTwitsSentiment | None:
+        url = f"https://api.stocktwits.com/api/2/streams/symbol/{ticker}.json"
+        try:
+            resp = s.fetch(url, consumer="claude30-stocktwits", agent_class="light")
+            data = resp.json()
+            msgs = data.get("messages", [])
+
+            bullish = 0
+            bearish = 0
+            top = []
+
+            for m in msgs:
+                sent = (m.get("entities") or {}).get("sentiment") or {}
+                basic = sent.get("basic", "")
+                if basic == "Bullish":
+                    bullish += 1
+                elif basic == "Bearish":
+                    bearish += 1
+                if len(top) < 3:
+                    top.append({"body": m.get("body", "")[:100], "sentiment": basic or "none"})
+
+            return StockTwitsSentiment(
+                ticker=ticker,
+                messages=len(msgs),
+                bullish=bullish,
+                bearish=bearish,
+                top_messages=top,
+            )
+        except (ShoalError, json.JSONDecodeError) as e:
+            return None
+
+    with ThreadPoolExecutor(max_workers=5) as pool:
+        futures = {pool.submit(fetch_sentiment, t): t for t in tickers}
+        for f in as_completed(futures):
+            r = f.result()
+            if r:
+                results.append(r)
+
+    return results
+
+
+def print_stocktwits(sentiments: list[StockTwitsSentiment]):
+    if not sentiments:
+        print("  no stocktwits data")
+        return
+    for st in sorted(sentiments, key=lambda x: x.bullish + x.bearish, reverse=True):
+        total = st.bullish + st.bearish
+        if total > 0:
+            bar_len = 20
+            bull_bar = int(st.ratio * bar_len)
+            bar = "+" * bull_bar + "-" * (bar_len - bull_bar)
+            print(f"  {st.ticker:5s} [{bar}] {st.bullish}B/{st.bearish}b ({st.messages} msgs)")
+        else:
+            print(f"  {st.ticker:5s} [     no sentiment     ] ({st.messages} msgs)")
+
+
 # --- StockTwits Discovery (trending tickers — minnow tier) ---
 
 @dataclass
@@ -301,7 +380,7 @@ def print_social(posts: list[SocialPost]):
 
 # --- Main ---
 
-def export_json(quotes, headlines, posts, outpath, trending=None):
+def export_json(quotes, headlines, posts, outpath, sentiment=None, trending=None):
     """Export all data to a JSON file for the GitHub Pages dashboard."""
     data = {
         "updated": datetime.now().isoformat(),
@@ -310,6 +389,7 @@ def export_json(quotes, headlines, posts, outpath, trending=None):
         "quotes": [vars(q) for q in quotes],
         "news": [vars(h) for h in headlines],
         "social": [vars(p) for p in posts],
+        "sentiment": [vars(st) for st in (sentiment or [])],
         "trending": [vars(t) for t in (trending or [])],
     }
 
@@ -324,6 +404,7 @@ def main():
     parser.add_argument("--quotes", action="store_true", help="scrape stock quotes")
     parser.add_argument("--news", action="store_true", help="scrape news headlines")
     parser.add_argument("--social", action="store_true", help="scrape reddit social posts")
+    parser.add_argument("--sentiment", action="store_true", help="scrape StockTwits sentiment")
     parser.add_argument("--trending", action="store_true", help="scrape StockTwits trending")
     parser.add_argument("--all", action="store_true", help="scrape everything")
     parser.add_argument("--export", default="", help="export JSON to path (for GitHub Pages)")
@@ -353,6 +434,7 @@ def main():
     all_quotes = []
     all_headlines = []
     all_posts = []
+    all_sentiment = []
     all_trending = []
 
     # --- Quotes ---
@@ -384,6 +466,16 @@ def main():
         print_social(all_posts)
         print(f"\n  {len(all_posts)} posts for {len(top_tickers)} tickers in {dt:.1f}s")
 
+    # --- StockTwits Sentiment ---
+    if args.sentiment or args.all:
+        print(f"\n--- StockTwits Sentiment (per-ticker → minnow) ---\n")
+        t0 = time.perf_counter()
+        top_tickers = sorted(TICKERS, key=lambda t: CLAUDE_30[t]["weight"], reverse=True)[:15]
+        all_sentiment = scrape_stocktwits(s, top_tickers)
+        dt = time.perf_counter() - t0
+        print_stocktwits(all_sentiment)
+        print(f"\n  {len(all_sentiment)} tickers in {dt:.1f}s")
+
     # --- Trending ---
     if args.trending or args.all:
         print(f"\n--- Trending (StockTwits API → minnow) ---\n")
@@ -395,7 +487,7 @@ def main():
 
     # --- Export ---
     if args.export:
-        export_json(all_quotes, all_headlines, all_posts, args.export, all_trending)
+        export_json(all_quotes, all_headlines, all_posts, args.export, all_sentiment, all_trending)
 
     print(f"\n{'='*60}")
     print(f"  done")
