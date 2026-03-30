@@ -76,6 +76,11 @@
     </div>
   </div>
 
+  <div class="section" id="sentiment-section" style="display:none; margin-top: 16px;">
+    <h2>StockTwits Sentiment</h2>
+    <div id="sentiment"></div>
+  </div>
+
   <p class="footer">
     data scraped via <a href="https://github.com/we-be/shoal">Shoal</a> browser orchestration
     · <a href="https://github.com/we-be/jpow">source</a>
@@ -160,6 +165,25 @@ function render(data, history) {
   document.getElementById('social').innerHTML = social.length ? social.map(p =>
     `<div class="social"><span class="score">▲${p.score}</span><span class="hl-ticker">${p.ticker}</span><span class="sub">r/${p.subreddit}</span><a href="${p.url}" target="_blank">${p.title.slice(0,60)}</a></div>`
   ).join('') : '<div class="no-data">no posts</div>';
+
+  // Sentiment bars
+  const sentiment = (data.sentiment || []).sort((a,b) => (b.bullish+b.bearish) - (a.bullish+a.bearish));
+  if (sentiment.length) {
+    document.getElementById('sentiment-section').style.display = '';
+    document.getElementById('sentiment').innerHTML = sentiment.map(s => {
+      const total = s.bullish + s.bearish;
+      const pct = total > 0 ? Math.round(s.bullish / total * 100) : 50;
+      const barColor = pct >= 60 ? '#3fb950' : pct <= 40 ? '#f85149' : '#d29922';
+      return `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #21262d">
+        <span class="hl-ticker" style="min-width:50px">${s.ticker}</span>
+        <div style="flex:1;display:flex;height:14px;border-radius:3px;overflow:hidden;background:#21262d">
+          <div style="width:${pct}%;background:${barColor};transition:width 0.3s"></div>
+        </div>
+        <span style="color:#484f58;font-size:11px;min-width:70px;text-align:right">${s.bullish}B/${s.bearish}b</span>
+        <span style="color:${barColor};font-size:11px;font-weight:bold;min-width:35px">${pct}%</span>
+      </div>`;
+    }).join('');
+  }
 
   // Index chart
   if (history) renderIndexChart(history);
