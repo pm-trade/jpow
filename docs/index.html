@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude-30 Index</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0e17; color: #c9d1d9; font-family: 'SF Mono', 'Cascadia Code', monospace; font-size: 13px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  h1 { color: #58a6ff; font-size: 20px; }
+  .subtitle { color: #484f58; font-size: 12px; margin-bottom: 20px; }
+  .updated { color: #484f58; font-size: 11px; position: absolute; top: 20px; right: 20px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-bottom: 20px; }
+  .card { background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 12px; cursor: default; }
+  .card:hover { border-color: #388bfd; }
+  .ticker { font-size: 14px; font-weight: bold; color: #58a6ff; }
+  .name { color: #484f58; font-size: 11px; margin-bottom: 4px; }
+  .price { font-size: 18px; font-weight: bold; }
+  .change { font-size: 12px; font-weight: bold; }
+  .up { color: #3fb950; }
+  .down { color: #f85149; }
+  .flat { color: #484f58; }
+  .volume { color: #484f58; font-size: 11px; }
+  .sector-tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-top: 4px; }
+  .sector-silicon { background: #da3633aa; color: #ffa198; }
+  .sector-cloud { background: #1f6febaa; color: #79c0ff; }
+  .sector-software { background: #8957e5aa; color: #d2a8ff; }
+  .sector-infra { background: #d29922aa; color: #e3b341; }
+  .sector-hardware { background: #388bfdaa; color: #a5d6ff; }
+  .sector-emerging { background: #3fb950aa; color: #7ee787; }
+  .section { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .section h2 { color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .headline { padding: 6px 0; border-bottom: 1px solid #21262d; }
+  .headline:last-child { border-bottom: none; }
+  .headline .hl-ticker { color: #58a6ff; font-weight: bold; margin-right: 8px; }
+  .headline .hl-source { color: #484f58; font-size: 11px; }
+  .headline a { color: #c9d1d9; text-decoration: none; }
+  .headline a:hover { color: #58a6ff; }
+  .social { padding: 6px 0; border-bottom: 1px solid #21262d; display: flex; gap: 12px; align-items: baseline; }
+  .social:last-child { border-bottom: none; }
+  .social .score { color: #3fb950; font-weight: bold; min-width: 50px; text-align: right; }
+  .social .sub { color: #484f58; font-size: 11px; min-width: 130px; }
+  .no-data { color: #21262d; font-style: italic; padding: 20px; text-align: center; }
+  .stats { display: flex; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+  .stat-box { text-align: center; }
+  .stat-val { font-size: 24px; font-weight: bold; color: #58a6ff; }
+  .stat-label { font-size: 11px; color: #484f58; }
+  .footer { text-align: center; color: #21262d; font-size: 11px; margin-top: 30px; }
+  .footer a { color: #484f58; }
+</style>
+</head>
+<body>
+<div class="container">
+  <h1>Claude-30 Index</h1>
+  <p class="subtitle">30 stocks tracking the AI infrastructure stack — powered by <a href="https://github.com/we-be/shoal" style="color:#58a6ff">Shoal</a></p>
+  <div class="updated" id="updated"></div>
+
+  <div class="stats" id="stats"></div>
+  <div class="grid" id="quotes"></div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+    <div class="section">
+      <h2>News</h2>
+      <div id="news"><div class="no-data">loading...</div></div>
+    </div>
+    <div class="section">
+      <h2>Social</h2>
+      <div id="social"><div class="no-data">loading...</div></div>
+    </div>
+  </div>
+
+  <p class="footer">
+    data scraped via <a href="https://github.com/we-be/shoal">Shoal</a> browser orchestration
+    · <a href="https://github.com/we-be/jpow">source</a>
+  </p>
+</div>
+
+<script>
+const SECTOR_NAMES = {
+  silicon: 'GPU & Silicon', cloud: 'Cloud & Compute', software: 'AI Software',
+  infra: 'Infrastructure', hardware: 'Hardware', emerging: 'Emerging AI'
+};
+
+async function load() {
+  try {
+    const resp = await fetch('data.json');
+    const data = await resp.json();
+    render(data);
+  } catch (e) {
+    document.getElementById('quotes').innerHTML = '<div class="no-data">no data yet — run the scraper with --export docs/data.json</div>';
+  }
+}
+
+function render(data) {
+  document.getElementById('updated').textContent = 'updated ' + new Date(data.updated).toLocaleString();
+
+  // Stats
+  const quotes = data.quotes || [];
+  const gainers = quotes.filter(q => q.change > 0).length;
+  const losers = quotes.filter(q => q.change < 0).length;
+  document.getElementById('stats').innerHTML = `
+    <div class="stat-box"><div class="stat-val">${quotes.length}</div><div class="stat-label">stocks</div></div>
+    <div class="stat-box"><div class="stat-val up">${gainers}</div><div class="stat-label">gainers</div></div>
+    <div class="stat-box"><div class="stat-val down">${losers}</div><div class="stat-label">losers</div></div>
+    <div class="stat-box"><div class="stat-val">${(data.news||[]).length}</div><div class="stat-label">headlines</div></div>
+    <div class="stat-box"><div class="stat-val">${(data.social||[]).length}</div><div class="stat-label">posts</div></div>
+  `;
+
+  // Quote cards
+  const sorted = [...quotes].sort((a, b) => (data.index[b.ticker]?.weight || 0) - (data.index[a.ticker]?.weight || 0));
+  document.getElementById('quotes').innerHTML = sorted.map(q => {
+    const info = data.index[q.ticker] || {};
+    const cls = q.change > 0 ? 'up' : q.change < 0 ? 'down' : 'flat';
+    const dir = q.change >= 0 ? '+' : '';
+    const vol = q.volume > 1e6 ? (q.volume/1e6).toFixed(1)+'M' : (q.volume/1e3).toFixed(0)+'K';
+    return `<div class="card">
+      <div class="ticker">${q.ticker}</div>
+      <div class="name">${info.name || ''}</div>
+      <div class="price ${cls}">$${q.price.toFixed(2)}</div>
+      <div class="change ${cls}">${dir}${q.change_pct.toFixed(2)}%</div>
+      <div class="volume">vol ${vol}</div>
+      <span class="sector-tag sector-${info.sector || ''}">${SECTOR_NAMES[info.sector] || ''}</span>
+    </div>`;
+  }).join('');
+
+  // News
+  const news = (data.news || []).slice(0, 20);
+  document.getElementById('news').innerHTML = news.length ? news.map(h =>
+    `<div class="headline"><span class="hl-ticker">${h.ticker}</span><a href="${h.url}" target="_blank">${h.title}</a> <span class="hl-source">${h.source}</span></div>`
+  ).join('') : '<div class="no-data">no headlines</div>';
+
+  // Social
+  const social = (data.social || []).sort((a,b) => b.score - a.score).slice(0, 15);
+  document.getElementById('social').innerHTML = social.length ? social.map(p =>
+    `<div class="social"><span class="score">▲${p.score}</span><span class="hl-ticker">${p.ticker}</span><span class="sub">r/${p.subreddit}</span><a href="${p.url}" target="_blank">${p.title.slice(0,60)}</a></div>`
+  ).join('') : '<div class="no-data">no posts</div>';
+}
+
+load();
+</script>
+</body>
+</html>

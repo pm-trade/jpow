@@ -252,12 +252,30 @@ def print_social(posts: list[SocialPost]):
 
 # --- Main ---
 
+def export_json(quotes, headlines, posts, outpath):
+    """Export all data to a JSON file for the GitHub Pages dashboard."""
+    data = {
+        "updated": datetime.now().isoformat(),
+        "index": {t: info for t, info in CLAUDE_30.items()},
+        "sectors": SECTORS,
+        "quotes": [vars(q) for q in quotes],
+        "news": [vars(h) for h in headlines],
+        "social": [vars(p) for p in posts],
+    }
+
+    os.makedirs(os.path.dirname(outpath), exist_ok=True)
+    with open(outpath, "w") as f:
+        json.dump(data, f, indent=2)
+    print(f"  exported to {outpath}")
+
+
 def main():
     parser = argparse.ArgumentParser(description="Claude-30 Index Scraper")
     parser.add_argument("--quotes", action="store_true", help="scrape stock quotes")
     parser.add_argument("--news", action="store_true", help="scrape news headlines")
     parser.add_argument("--social", action="store_true", help="scrape reddit social posts")
     parser.add_argument("--all", action="store_true", help="scrape everything")
+    parser.add_argument("--export", default="", help="export JSON to path (for GitHub Pages)")
     parser.add_argument("--shoal", default=SHOAL_URL, help="Shoal controller URL")
     args = parser.parse_args()
 
@@ -281,35 +299,42 @@ def main():
         print(f"  start with: cd shoal && make run-cf")
         return
 
+    all_quotes = []
+    all_headlines = []
+    all_posts = []
+
     # --- Quotes ---
     if args.quotes or args.all:
         print(f"\n--- Quotes (Yahoo Finance API → minnow) ---\n")
         t0 = time.perf_counter()
-        quotes = scrape_quotes(s, TICKERS)
+        all_quotes = scrape_quotes(s, TICKERS)
         dt = time.perf_counter() - t0
-        print_quotes(quotes)
-        print(f"\n  {len(quotes)}/{len(TICKERS)} quotes in {dt:.1f}s")
+        print_quotes(all_quotes)
+        print(f"\n  {len(all_quotes)}/{len(TICKERS)} quotes in {dt:.1f}s")
 
     # --- News ---
     if args.news or args.all:
         print(f"\n--- News (Google News RSS → minnow) ---\n")
         t0 = time.perf_counter()
-        # Just do top 10 by weight to keep it fast
         top_tickers = sorted(TICKERS, key=lambda t: CLAUDE_30[t]["weight"], reverse=True)[:10]
-        headlines = scrape_news(s, top_tickers)
+        all_headlines = scrape_news(s, top_tickers)
         dt = time.perf_counter() - t0
-        print_news(headlines)
-        print(f"\n  {len(headlines)} headlines for {len(top_tickers)} tickers in {dt:.1f}s")
+        print_news(all_headlines)
+        print(f"\n  {len(all_headlines)} headlines for {len(top_tickers)} tickers in {dt:.1f}s")
 
     # --- Social ---
     if args.social or args.all:
         print(f"\n--- Social (Reddit JSON → minnow) ---\n")
         t0 = time.perf_counter()
         top_tickers = sorted(TICKERS, key=lambda t: CLAUDE_30[t]["weight"], reverse=True)[:10]
-        posts = scrape_social(s, top_tickers)
+        all_posts = scrape_social(s, top_tickers)
         dt = time.perf_counter() - t0
-        print_social(posts)
-        print(f"\n  {len(posts)} posts for {len(top_tickers)} tickers in {dt:.1f}s")
+        print_social(all_posts)
+        print(f"\n  {len(all_posts)} posts for {len(top_tickers)} tickers in {dt:.1f}s")
+
+    # --- Export ---
+    if args.export:
+        export_json(all_quotes, all_headlines, all_posts, args.export)
 
     print(f"\n{'='*60}")
     print(f"  done")
