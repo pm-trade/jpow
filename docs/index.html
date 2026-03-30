@@ -124,18 +124,28 @@ function render(data, history) {
 
   // Quote cards
   const sorted = [...quotes].sort((a, b) => (data.index[b.ticker]?.weight || 0) - (data.index[a.ticker]?.weight || 0));
+  const totalWeight = Object.values(data.index).reduce((s, i) => s + (i.weight || 0), 0);
   document.getElementById('quotes').innerHTML = sorted.map(q => {
     const info = data.index[q.ticker] || {};
     const cls = q.change > 0 ? 'up' : q.change < 0 ? 'down' : 'flat';
     const dir = q.change >= 0 ? '+' : '';
     const vol = q.volume > 1e6 ? (q.volume/1e6).toFixed(1)+'M' : (q.volume/1e3).toFixed(0)+'K';
+    const wPct = totalWeight > 0 ? ((info.weight || 0) / totalWeight * 100).toFixed(1) : '0';
     return `<div class="card">
-      <div class="ticker">${q.ticker}</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <div class="ticker">${q.ticker}</div>
+        <div style="color:#484f58;font-size:10px;font-weight:bold">${wPct}%</div>
+      </div>
       <div class="name">${info.name || ''}</div>
       <div class="price ${cls}">$${q.price.toFixed(2)}</div>
       <div class="change ${cls}">${dir}${q.change_pct.toFixed(2)}%</div>
       <div class="volume">vol ${vol}</div>
-      <span class="sector-tag sector-${info.sector || ''}">${SECTOR_NAMES[info.sector] || ''}</span>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
+        <span class="sector-tag sector-${info.sector || ''}">${SECTOR_NAMES[info.sector] || ''}</span>
+        <div style="background:#21262d;border-radius:2px;height:4px;flex:1;margin-left:6px;overflow:hidden">
+          <div style="background:#58a6ff44;height:100%;width:${wPct}%"></div>
+        </div>
+      </div>
     </div>`;
   }).join('');
 
