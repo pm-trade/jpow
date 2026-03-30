@@ -57,6 +57,12 @@
   <div class="updated" id="updated"></div>
 
   <div class="stats" id="stats"></div>
+
+  <div class="section" id="index-chart-section" style="display:none; margin-bottom: 16px;">
+    <h2>Claude-30 Index Performance</h2>
+    <canvas id="index-chart" style="width:100%!important; height:150px!important;"></canvas>
+  </div>
+
   <div class="grid" id="quotes"></div>
 
   <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
@@ -84,27 +90,36 @@ const SECTOR_NAMES = {
 
 async function load() {
   try {
-    const resp = await fetch('data.json');
-    const data = await resp.json();
-    render(data);
+    const [dataResp, histResp] = await Promise.all([
+      fetch('data.json'),
+      fetch('history.json').catch(() => null),
+    ]);
+    const data = await dataResp.json();
+    const history = histResp ? await histResp.json().catch(() => null) : null;
+    render(data, history);
   } catch (e) {
     document.getElementById('quotes').innerHTML = '<div class="no-data">no data yet — run the scraper with --export docs/data.json</div>';
   }
 }
 
-function render(data) {
+function render(data, history) {
   document.getElementById('updated').textContent = 'updated ' + new Date(data.updated).toLocaleString();
 
   // Stats
   const quotes = data.quotes || [];
   const gainers = quotes.filter(q => q.change > 0).length;
   const losers = quotes.filter(q => q.change < 0).length;
+  const idx = data.index_summary || {};
+  const idxCls = (idx.change || 0) >= 0 ? 'up' : 'down';
+  const idxDir = (idx.change || 0) >= 0 ? '+' : '';
   document.getElementById('stats').innerHTML = `
+    <div class="stat-box"><div class="stat-val ${idxCls}">${(idx.value||1000).toFixed(1)}</div><div class="stat-label">index ${idxDir}${(idx.change_pct||0).toFixed(2)}%</div></div>
     <div class="stat-box"><div class="stat-val">${quotes.length}</div><div class="stat-label">stocks</div></div>
     <div class="stat-box"><div class="stat-val up">${gainers}</div><div class="stat-label">gainers</div></div>
     <div class="stat-box"><div class="stat-val down">${losers}</div><div class="stat-label">losers</div></div>
     <div class="stat-box"><div class="stat-val">${(data.news||[]).length}</div><div class="stat-label">headlines</div></div>
     <div class="stat-box"><div class="stat-val">${(data.social||[]).length}</div><div class="stat-label">posts</div></div>
+    <div class="stat-box"><div class="stat-val">${(data.sentiment||[]).length}</div><div class="stat-label">sentiment</div></div>
   `;
 
   // Quote cards
@@ -135,6 +150,89 @@ function render(data) {
   document.getElementById('social').innerHTML = social.length ? social.map(p =>
     `<div class="social"><span class="score">▲${p.score}</span><span class="hl-ticker">${p.ticker}</span><span class="sub">r/${p.subreddit}</span><a href="${p.url}" target="_blank">${p.title.slice(0,60)}</a></div>`
   ).join('') : '<div class="no-data">no posts</div>';
+
+  // Index chart
+  if (history) renderIndexChart(history);
+}
+
+function renderIndexChart(history) {
+  if (!history || !history.points || history.points.length < 2) return;
+  document.getElementById('index-chart-section').style.display = '';
+
+  const canvas = document.getElementById('index-chart');
+  const ctx = canvas.getContext('2d');
+  const dpr = window.devicePixelRatio || 1;
+  const rect = canvas.getBoundingClientRect();
+  canvas.width = rect.width * dpr;
+  canvas.height = rect.height * dpr;
+  ctx.scale(dpr, dpr);
+  const W = rect.width, H = rect.height;
+
+  const points = history.points;
+  const values = points.map(p => p.index);
+  const minVal = Math.min(...values) * 0.999;
+  const maxVal = Math.max(...values) * 1.001;
+  const range = maxVal - minVal || 1;
+
+  const pad = { l: 50, r: 10, t: 10, b: 25 };
+  const cw = W - pad.l - pad.r;
+  const ch = H - pad.t - pad.b;
+
+  // Grid
+  ctx.strokeStyle = '#21262d';
+  ctx.lineWidth = 1;
+  for (let i = 0; i <= 4; i++) {
+    const y = pad.t + (ch / 4) * i;
+    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
+  }
+
+  // Y labels
+  ctx.fillStyle = '#484f58'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
+  for (let i = 0; i <= 4; i++) {
+    const val = maxVal - (range / 4) * i;
+    ctx.fillText(val.toFixed(1), pad.l - 4, pad.t + (ch / 4) * i + 3);
+  }
+
+  // X labels
+  ctx.textAlign = 'center';
+  for (let i = 0; i < points.length; i += Math.max(1, Math.floor(points.length / 6))) {
+    const x = pad.l + (i / (points.length - 1)) * cw;
+    const d = new Date(points[i].t);
+    ctx.fillText(d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}), x, H - 4);
+  }
+
+  // 1000 baseline
+  const baseY = pad.t + ch - ((1000 - minVal) / range) * ch;
+  ctx.strokeStyle = '#484f5844';
+  ctx.setLineDash([4, 4]);
+  ctx.beginPath(); ctx.moveTo(pad.l, baseY); ctx.lineTo(W - pad.r, baseY); ctx.stroke();
+  ctx.setLineDash([]);
+
+  // Line
+  const last = values[values.length - 1];
+  const color = last >= 1000 ? '#3fb950' : '#f85149';
+
+  ctx.fillStyle = color + '18';
+  ctx.beginPath();
+  ctx.moveTo(pad.l, pad.t + ch);
+  for (let i = 0; i < points.length; i++) {
+    const x = pad.l + (i / (points.length - 1)) * cw;
+    const y = pad.t + ch - ((values[i] - minVal) / range) * ch;
+    ctx.lineTo(x, y);
+  }
+  ctx.lineTo(pad.l + cw, pad.t + ch);
+  ctx.closePath();
+  ctx.fill();
+
+  ctx.strokeStyle = color;
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  for (let i = 0; i < points.length; i++) {
+    const x = pad.l + (i / (points.length - 1)) * cw;
+    const y = pad.t + ch - ((values[i] - minVal) / range) * ch;
+    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+  }
+  ctx.stroke();
 }
 
 load();

@@ -29,6 +29,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "..", "..", "sh
 from shoal import Shoal, ShoalError
 
 from index import CLAUDE_30, TICKERS, SECTORS, by_sector
+from history import record as record_history, get_summary
 
 
 SHOAL_URL = os.environ.get("SHOAL_URL", "http://localhost:8180")
@@ -385,6 +386,7 @@ def export_json(quotes, headlines, posts, outpath, sentiment=None, trending=None
     data = {
         "updated": datetime.now().isoformat(),
         "index": {t: info for t, info in CLAUDE_30.items()},
+        "index_summary": get_summary(),
         "sectors": SECTORS,
         "quotes": [vars(q) for q in quotes],
         "news": [vars(h) for h in headlines],
@@ -445,6 +447,12 @@ def main():
         dt = time.perf_counter() - t0
         print_quotes(all_quotes)
         print(f"\n  {len(all_quotes)}/{len(TICKERS)} quotes in {dt:.1f}s")
+
+        # Record to history
+        if all_quotes:
+            idx_val = record_history([vars(q) for q in all_quotes])
+            summary = get_summary()
+            print(f"  index: {summary['value']:.2f} ({'+' if summary['change'] >= 0 else ''}{summary['change_pct']:.2f}%) [{summary['points']} points]")
 
     # --- News ---
     if args.news or args.all:
