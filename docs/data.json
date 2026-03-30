@@ -1,5 +1,5 @@
 {
-  "updated": "2026-03-30T13:38:56.499513",
+  "updated": "2026-03-30T13:45:56.137404",
   "index": {
     "NVDA": {
       "name": "NVIDIA",
@@ -153,12 +153,12 @@
     }
   },
   "index_summary": {
-    "value": 983.85,
-    "change": -16.15,
-    "change_pct": -1.61,
+    "value": 986.58,
+    "change": -13.42,
+    "change_pct": -1.34,
     "high": 1001.51,
     "low": 983.51,
-    "points": 34,
+    "points": 35,
     "since": "2026-03-30T11:49:35.603126"
   },
   "sectors": {
@@ -172,297 +172,276 @@
   "quotes": [
     {
       "ticker": "AMD",
-      "price": 196.09,
+      "price": 196.8,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 24057919,
+      "volume": 24555702,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.498911"
+      "timestamp": "2026-03-30T13:45:49.570634"
     },
     {
       "ticker": "AVGO",
-      "price": 293.15,
+      "price": 293.41,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 13403369,
+      "volume": 13640271,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.580617"
-    },
-    {
-      "ticker": "MRVL",
-      "price": 88.17,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 10586795,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.607954"
-    },
-    {
-      "ticker": "AMZN",
-      "price": 201.84,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 22170901,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.674870"
-    },
-    {
-      "ticker": "INTC",
-      "price": 41.22,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 48199545,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.696590"
-    },
-    {
-      "ticker": "GOOG",
-      "price": 273.01,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 12111990,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.768607"
-    },
-    {
-      "ticker": "MSFT",
-      "price": 358.48,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 22700157,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.791489"
-    },
-    {
-      "ticker": "META",
-      "price": 536.2,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 13497947,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.844298"
-    },
-    {
-      "ticker": "CRM",
-      "price": 184.26,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 5776333,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.920357"
+      "timestamp": "2026-03-30T13:45:49.571948"
     },
     {
       "ticker": "NVDA",
-      "price": 165.76,
+      "price": 166.32,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 108586440,
+      "volume": 110226213,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.954377"
+      "timestamp": "2026-03-30T13:45:49.607158"
+    },
+    {
+      "ticker": "MRVL",
+      "price": 88.42,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 10674937,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:49.682386"
+    },
+    {
+      "ticker": "INTC",
+      "price": 41.34,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 49240118,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:49.715278"
+    },
+    {
+      "ticker": "AMZN",
+      "price": 202.2,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 22467162,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:49.717191"
+    },
+    {
+      "ticker": "MSFT",
+      "price": 359.823,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 23365855,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:49.724727"
+    },
+    {
+      "ticker": "META",
+      "price": 537.25,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 13693563,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:49.840968"
     },
     {
       "ticker": "ORCL",
-      "price": 138.3,
+      "price": 138.62,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 9639197,
+      "volume": 9788873,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.954898"
+      "timestamp": "2026-03-30T13:45:49.843460"
+    },
+    {
+      "ticker": "GOOG",
+      "price": 273.535,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 12279029,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:49.860613"
     },
     {
       "ticker": "PLTR",
-      "price": 139.0,
+      "price": 139.349,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 20682433,
+      "volume": 21058628,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:50.989144"
+      "timestamp": "2026-03-30T13:45:49.937077"
     },
     {
-      "ticker": "MDB",
-      "price": 234.855,
+      "ticker": "CRM",
+      "price": 184.67,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 586488,
+      "volume": 5873182,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.022242"
-    },
-    {
-      "ticker": "NET",
-      "price": 195.86,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 1867697,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.061216"
-    },
-    {
-      "ticker": "DDOG",
-      "price": 115.66,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 2373037,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.091297"
+      "timestamp": "2026-03-30T13:45:49.945049"
     },
     {
       "ticker": "SNOW",
-      "price": 155.03,
+      "price": 155.94,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 1976615,
+      "volume": 2007554,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.116124"
+      "timestamp": "2026-03-30T13:45:49.953006"
     },
     {
-      "ticker": "ANET",
-      "price": 116.725,
+      "ticker": "MDB",
+      "price": 235.585,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 3536000,
+      "volume": 601793,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.136400"
+      "timestamp": "2026-03-30T13:45:50.032165"
+    },
+    {
+      "ticker": "DDOG",
+      "price": 116.06,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 2432986,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:50.043070"
+    },
+    {
+      "ticker": "NET",
+      "price": 196.32,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 1939106,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:50.044182"
     },
     {
       "ticker": "FTNT",
-      "price": 80.03,
+      "price": 80.17,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 2849173,
+      "volume": 2894814,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.185711"
-    },
-    {
-      "ticker": "SMCI",
-      "price": 21.195,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 18407194,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.204537"
+      "timestamp": "2026-03-30T13:45:50.136897"
     },
     {
       "ticker": "CRWD",
-      "price": 383.02,
+      "price": 384.45,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 2438042,
+      "volume": 2468449,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.218454"
+      "timestamp": "2026-03-30T13:45:50.137247"
     },
     {
-      "ticker": "HPE",
-      "price": 22.705,
+      "ticker": "ANET",
+      "price": 116.845,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 9406188,
+      "volume": 3583644,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.288603"
+      "timestamp": "2026-03-30T13:45:50.213307"
     },
     {
-      "ticker": "TSLA",
-      "price": 356.52,
+      "ticker": "SMCI",
+      "price": 21.25,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 38832881,
+      "volume": 18731525,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.295910"
+      "timestamp": "2026-03-30T13:45:50.229236"
     },
     {
       "ticker": "DELL",
-      "price": 164.33,
+      "price": 164.56,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 4850563,
+      "volume": 4905859,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.300646"
+      "timestamp": "2026-03-30T13:45:50.239165"
     },
     {
-      "ticker": "PATH",
-      "price": 10.885,
+      "ticker": "HPE",
+      "price": 22.665,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 10902220,
+      "volume": 9593935,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.362862"
+      "timestamp": "2026-03-30T13:45:50.321213"
+    },
+    {
+      "ticker": "TSLA",
+      "price": 357.3,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 39728149,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:50.322572"
     },
     {
       "ticker": "ISRG",
-      "price": 452.155,
+      "price": 452.805,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 870915,
+      "volume": 883768,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.363790"
-    },
-    {
-      "ticker": "RKLB",
-      "price": 56.885,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 12993080,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.425494"
+      "timestamp": "2026-03-30T13:45:50.338000"
     },
     {
       "ticker": "IONQ",
-      "price": 26.401,
+      "price": 26.639,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 11076662,
+      "volume": 11263751,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.430658"
+      "timestamp": "2026-03-30T13:45:50.436759"
+    },
+    {
+      "ticker": "PATH",
+      "price": 10.925,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 11082232,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:50.500645"
+    },
+    {
+      "ticker": "RKLB",
+      "price": 57.188,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 13170599,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:50.501892"
     },
     {
       "ticker": "SOUN",
-      "price": 5.91,
+      "price": 5.97,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 11269489,
+      "volume": 11745522,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.438485"
-    },
-    {
-      "ticker": "RGTI",
-      "price": 12.747,
-      "change": 0.0,
-      "change_pct": 0.0,
-      "volume": 13547610,
-      "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.494947"
+      "timestamp": "2026-03-30T13:45:50.536174"
     },
     {
       "ticker": "BBAI",
-      "price": 3.06,
+      "price": 3.08,
       "change": 0.0,
       "change_pct": 0.0,
-      "volume": 19412152,
+      "volume": 19721978,
       "market_cap": 0,
-      "timestamp": "2026-03-30T13:38:51.497533"
+      "timestamp": "2026-03-30T13:45:50.598638"
+    },
+    {
+      "ticker": "RGTI",
+      "price": 12.815,
+      "change": 0.0,
+      "change_pct": 0.0,
+      "volume": 13813831,
+      "market_cap": 0,
+      "timestamp": "2026-03-30T13:45:50.607135"
     }
   ],
   "news": [
-    {
-      "ticker": "MSFT",
-      "title": "Is Now a Good Time to Buy Microsoft Stock? - Yahoo Finance",
-      "source": "Yahoo Finance",
-      "url": "https://finance.yahoo.com",
-      "timestamp": "Sun, 29 Mar 2026 23:51:00 GMT"
-    },
-    {
-      "ticker": "MSFT",
-      "title": "2 'Magnificent 7' stocks see stunning plunges - Yahoo Finance",
-      "source": "Yahoo Finance",
-      "url": "https://finance.yahoo.com",
-      "timestamp": "Mon, 30 Mar 2026 16:49:58 GMT"
-    },
-    {
-      "ticker": "MSFT",
-      "title": "Microsoft Set for Worst Quarter Since 2008 as AI Takes Two Bites - Bloomberg.com",
-      "source": "Bloomberg.com",
-      "url": "https://www.bloomberg.com",
-      "timestamp": "Fri, 27 Mar 2026 13:35:27 GMT"
-    },
     {
       "ticker": "AMZN",
       "title": "Jump on the Dip or Get Out Now? Jefferies Weighs in on Amazon Stock (AMZN) - TipRanks",
@@ -483,6 +462,27 @@
       "source": "MSN",
       "url": "https://www.msn.com",
       "timestamp": "Mon, 30 Mar 2026 11:52:19 GMT"
+    },
+    {
+      "ticker": "MSFT",
+      "title": "Is Now a Good Time to Buy Microsoft Stock? - Yahoo Finance",
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com",
+      "timestamp": "Sun, 29 Mar 2026 23:51:00 GMT"
+    },
+    {
+      "ticker": "MSFT",
+      "title": "2 'Magnificent 7' stocks see stunning plunges - Yahoo Finance",
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com",
+      "timestamp": "Mon, 30 Mar 2026 16:49:58 GMT"
+    },
+    {
+      "ticker": "MSFT",
+      "title": "Microsoft Set for Worst Quarter Since 2008 as AI Takes Two Bites - Bloomberg.com",
+      "source": "Bloomberg.com",
+      "url": "https://www.bloomberg.com",
+      "timestamp": "Fri, 27 Mar 2026 13:35:27 GMT"
     },
     {
       "ticker": "NVDA",
@@ -506,32 +506,11 @@
       "timestamp": "Mon, 30 Mar 2026 12:19:46 GMT"
     },
     {
-      "ticker": "AMD",
-      "title": "AMD Stock Is Holding Near $202. Here\u2019s What\u2019s Driving the Next Move in 2026 - tikr.com",
-      "source": "tikr.com",
-      "url": "https://www.tikr.com",
-      "timestamp": "Mon, 30 Mar 2026 16:38:53 GMT"
-    },
-    {
-      "ticker": "AMD",
-      "title": "What's Going On With AMD Stock Today - TradingView",
-      "source": "TradingView",
-      "url": "https://www.tradingview.com",
-      "timestamp": "Mon, 30 Mar 2026 16:22:28 GMT"
-    },
-    {
-      "ticker": "AMD",
-      "title": "AMD stock sends valuation signal for first time in 3 years - thestreet.com",
-      "source": "thestreet.com",
-      "url": "https://www.thestreet.com",
-      "timestamp": "Mon, 30 Mar 2026 14:47:00 GMT"
-    },
-    {
       "ticker": "AVGO",
-      "title": "Marvell vs. Broadcom: Which Custom Artificial Intelligence (AI) Chip Stock Has More Upside in 2026? - fool.com",
-      "source": "fool.com",
-      "url": "https://www.fool.com",
-      "timestamp": "Mon, 30 Mar 2026 13:45:00 GMT"
+      "title": "Marvell vs. Broadcom: Which Custom Artificial Intelligence (AI) Chip Stock Has More Upside in 2026? - Yahoo Finance",
+      "source": "Yahoo Finance",
+      "url": "https://finance.yahoo.com",
+      "timestamp": "Mon, 30 Mar 2026 13:05:00 GMT"
     },
     {
       "ticker": "AVGO",
@@ -569,6 +548,27 @@
       "timestamp": "Sun, 29 Mar 2026 20:50:00 GMT"
     },
     {
+      "ticker": "META",
+      "title": "Meta Set a $9 Trillion Target for the Stock. Then Came the Bad News. - Barron's",
+      "source": "Barron's",
+      "url": "https://www.barrons.com",
+      "timestamp": "Sun, 29 Mar 2026 16:42:00 GMT"
+    },
+    {
+      "ticker": "META",
+      "title": "Meta Stock Slides After Back-to-Back Courtroom Losses - WSJ",
+      "source": "WSJ",
+      "url": "https://www.wsj.com",
+      "timestamp": "Thu, 26 Mar 2026 19:35:00 GMT"
+    },
+    {
+      "ticker": "META",
+      "title": "Meta Named Morgan Stanley's New Top Pick Following Sell-Off - Investor's Business Daily",
+      "source": "Investor's Business Daily",
+      "url": "https://www.investors.com",
+      "timestamp": "Mon, 30 Mar 2026 13:07:00 GMT"
+    },
+    {
       "ticker": "TSLA",
       "title": "Tesla Grew Sales in Europe for the First Time in a Year. Is the Automaker's Stock Set to Soar in 2026? - fool.com",
       "source": "fool.com",
@@ -590,6 +590,27 @@
       "timestamp": "Mon, 30 Mar 2026 09:22:34 GMT"
     },
     {
+      "ticker": "AMD",
+      "title": "AMD Stock Is Holding Near $202. Here\u2019s What\u2019s Driving the Next Move in 2026 - TIKR.com",
+      "source": "TIKR.com",
+      "url": "https://www.tikr.com",
+      "timestamp": "Mon, 30 Mar 2026 16:38:53 GMT"
+    },
+    {
+      "ticker": "AMD",
+      "title": "What's Going On With AMD Stock Today - TradingView",
+      "source": "TradingView",
+      "url": "https://www.tradingview.com",
+      "timestamp": "Mon, 30 Mar 2026 16:22:28 GMT"
+    },
+    {
+      "ticker": "AMD",
+      "title": "AMD stock sends valuation signal for first time in 3 years - thestreet.com",
+      "source": "thestreet.com",
+      "url": "https://www.thestreet.com",
+      "timestamp": "Mon, 30 Mar 2026 14:47:00 GMT"
+    },
+    {
       "ticker": "ORCL",
       "title": "Why Oracle\u2019s stock may be a \u2018go-to\u2019 AI winner that investors are overlooking - MarketWatch",
       "source": "MarketWatch",
@@ -609,27 +630,6 @@
       "source": "Yahoo Finance",
       "url": "https://finance.yahoo.com",
       "timestamp": "Sat, 14 Mar 2026 07:00:00 GMT"
-    },
-    {
-      "ticker": "META",
-      "title": "Meta Set a $9 Trillion Target for the Stock. Then Came the Bad News. - Barron's",
-      "source": "Barron's",
-      "url": "https://www.barrons.com",
-      "timestamp": "Sun, 29 Mar 2026 16:42:00 GMT"
-    },
-    {
-      "ticker": "META",
-      "title": "Meta Stock Slides After Back-to-Back Courtroom Losses - WSJ",
-      "source": "WSJ",
-      "url": "https://www.wsj.com",
-      "timestamp": "Thu, 26 Mar 2026 19:35:00 GMT"
-    },
-    {
-      "ticker": "META",
-      "title": "Meta Named Morgan Stanley's New Top Pick Following Sell-Off - Investor's Business Daily",
-      "source": "Investor's Business Daily",
-      "url": "https://www.investors.com",
-      "timestamp": "Mon, 30 Mar 2026 13:07:00 GMT"
     },
     {
       "ticker": "CRM",
@@ -655,33 +655,33 @@
   ],
   "social": [
     {
-      "ticker": "MSFT",
-      "title": "MSFT is super under valued",
-      "score": 1679,
-      "comments": 597,
+      "ticker": "NVDA",
+      "title": "Arm Holdings (ARM) up +13% as said it will start selling its own chips for 1st time. The new business is expected to generate ~$15b annually",
+      "score": 552,
+      "comments": 62,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1s7bzlq/msft_is_super_under_valued/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1s36y9e/arm_holdings_arm_up_13_as_said_it_will_start/"
     },
     {
-      "ticker": "MSFT",
-      "title": "ROSS Stores Short Idea",
-      "score": 259,
-      "comments": 172,
+      "ticker": "NVDA",
+      "title": "This is the dumbest shit I've seen in awhile [DD]",
+      "score": 365,
+      "comments": 169,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1s6ok0l/ross_stores_short_idea/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1s2w3nf/this_is_the_dumbest_shit_ive_seen_in_awhile_dd/"
     },
     {
-      "ticker": "MSFT",
-      "title": "Rolled USO, Trimmed BNO, Puts on LUV. Oil Yolo.",
-      "score": 34,
-      "comments": 32,
+      "ticker": "NVDA",
+      "title": "I spy a tiny bit of green \ud83d\udc40",
+      "score": 39,
+      "comments": 13,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1s5mxv5/rolled_uso_trimmed_bno_puts_on_luv_oil_yolo/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1rxji9n/i_spy_a_tiny_bit_of_green/"
     },
     {
       "ticker": "AMZN",
       "title": "ROSS Stores Short Idea",
-      "score": 260,
+      "score": 259,
       "comments": 172,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s6ok0l/ross_stores_short_idea/"
@@ -697,39 +697,39 @@
     {
       "ticker": "AMZN",
       "title": "Wife will divorce me if she finds out",
-      "score": 2801,
+      "score": 2802,
       "comments": 1376,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s4fz9s/wife_will_divorce_me_if_she_finds_out/"
     },
     {
-      "ticker": "NVDA",
-      "title": "Arm Holdings (ARM) up +13% as said it will start selling its own chips for 1st time. The new business is expected to generate ~$15b annually",
-      "score": 545,
-      "comments": 62,
+      "ticker": "MSFT",
+      "title": "MSFT is super under valued",
+      "score": 1683,
+      "comments": 599,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1s36y9e/arm_holdings_arm_up_13_as_said_it_will_start/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1s7bzlq/msft_is_super_under_valued/"
     },
     {
-      "ticker": "NVDA",
-      "title": "This is the dumbest shit I've seen in awhile [DD]",
-      "score": 370,
-      "comments": 169,
+      "ticker": "MSFT",
+      "title": "ROSS Stores Short Idea",
+      "score": 258,
+      "comments": 172,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1s2w3nf/this_is_the_dumbest_shit_ive_seen_in_awhile_dd/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1s6ok0l/ross_stores_short_idea/"
     },
     {
-      "ticker": "NVDA",
-      "title": "I spy a tiny bit of green \ud83d\udc40",
-      "score": 36,
-      "comments": 13,
+      "ticker": "MSFT",
+      "title": "Rolled USO, Trimmed BNO, Puts on LUV. Oil Yolo.",
+      "score": 33,
+      "comments": 32,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1rxji9n/i_spy_a_tiny_bit_of_green/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1s5mxv5/rolled_uso_trimmed_bno_puts_on_luv_oil_yolo/"
     },
     {
       "ticker": "GOOG",
       "title": "ROSS Stores Short Idea",
-      "score": 264,
+      "score": 258,
       "comments": 172,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s6ok0l/ross_stores_short_idea/"
@@ -737,7 +737,7 @@
     {
       "ticker": "GOOG",
       "title": "The current market meltdown and how to navigate it.",
-      "score": 455,
+      "score": 458,
       "comments": 378,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s68p8i/the_current_market_meltdown_and_how_to_navigate_it/"
@@ -745,39 +745,15 @@
     {
       "ticker": "GOOG",
       "title": "Wife will divorce me if she finds out",
-      "score": 2804,
+      "score": 2805,
       "comments": 1376,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s4fz9s/wife_will_divorce_me_if_she_finds_out/"
     },
     {
-      "ticker": "AVGO",
-      "title": "Made a ton of plays today. Let's see where they end up tomorrow and at the end of the week.",
-      "score": 16,
-      "comments": 34,
-      "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1rqemvh/made_a_ton_of_plays_today_lets_see_where_they_end/"
-    },
-    {
-      "ticker": "AVGO",
-      "title": "Marvell +12% pre-market after Q4 beat. EPS $0.80 vs $0.79, revenue $2.22B vs $2.21B, guides $2.4B Q1, targets ~$15B by 2028",
-      "score": 38,
-      "comments": 14,
-      "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1rme2om/marvell_12_premarket_after_q4_beat_eps_080_vs_079/"
-    },
-    {
-      "ticker": "AVGO",
-      "title": "Broadcom +5% after-hours on Q1 2026 earnings beat. Revenue +29% YoY to $19.3B, AI +106% to $8.4B, guides $22B Q2 vs $20.6B est, $10B buyback",
-      "score": 295,
-      "comments": 50,
-      "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1rl47nl/broadcom_5_afterhours_on_q1_2026_earnings_beat/"
-    },
-    {
       "ticker": "META",
       "title": "ROSS Stores Short Idea",
-      "score": 260,
+      "score": 263,
       "comments": 172,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s6ok0l/ross_stores_short_idea/"
@@ -785,7 +761,7 @@
     {
       "ticker": "META",
       "title": "The current market meltdown and how to navigate it.",
-      "score": 464,
+      "score": 458,
       "comments": 378,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s68p8i/the_current_market_meltdown_and_how_to_navigate_it/"
@@ -799,9 +775,33 @@
       "url": "https://reddit.com/r/wallstreetbets/comments/1s5e1cv/full_port_leaps_rddt_googl/"
     },
     {
+      "ticker": "TSLA",
+      "title": "The current market meltdown and how to navigate it.",
+      "score": 460,
+      "comments": 378,
+      "subreddit": "wallstreetbets",
+      "url": "https://reddit.com/r/wallstreetbets/comments/1s68p8i/the_current_market_meltdown_and_how_to_navigate_it/"
+    },
+    {
+      "ticker": "TSLA",
+      "title": "Some days it just works, guys.",
+      "score": 118,
+      "comments": 31,
+      "subreddit": "wallstreetbets",
+      "url": "https://reddit.com/r/wallstreetbets/comments/1rybbw6/some_days_it_just_works_guys/"
+    },
+    {
+      "ticker": "TSLA",
+      "title": "Selling options is the way",
+      "score": 683,
+      "comments": 263,
+      "subreddit": "wallstreetbets",
+      "url": "https://reddit.com/r/wallstreetbets/comments/1ruwpkk/selling_options_is_the_way/"
+    },
+    {
       "ticker": "AMD",
       "title": "LULU and NKE YOLO",
-      "score": 47,
+      "score": 50,
       "comments": 22,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1rqa9ai/lulu_and_nke_yolo/"
@@ -809,7 +809,7 @@
     {
       "ticker": "AMD",
       "title": "It came to me in a dream to buy calls",
-      "score": 193,
+      "score": 190,
       "comments": 19,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1rq2ic7/it_came_to_me_in_a_dream_to_buy_calls/"
@@ -823,33 +823,33 @@
       "url": "https://reddit.com/r/wallstreetbets/comments/1rpkkha/from_50k_to_520k_trading_shares_no_options/"
     },
     {
-      "ticker": "TSLA",
-      "title": "The current market meltdown and how to navigate it.",
-      "score": 465,
-      "comments": 378,
+      "ticker": "AVGO",
+      "title": "Made a ton of plays today. Let's see where they end up tomorrow and at the end of the week.",
+      "score": 16,
+      "comments": 34,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1s68p8i/the_current_market_meltdown_and_how_to_navigate_it/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1rqemvh/made_a_ton_of_plays_today_lets_see_where_they_end/"
     },
     {
-      "ticker": "TSLA",
-      "title": "Some days it just works, guys.",
-      "score": 124,
-      "comments": 31,
+      "ticker": "AVGO",
+      "title": "Marvell +12% pre-market after Q4 beat. EPS $0.80 vs $0.79, revenue $2.22B vs $2.21B, guides $2.4B Q1, targets ~$15B by 2028",
+      "score": 35,
+      "comments": 14,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1rybbw6/some_days_it_just_works_guys/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1rme2om/marvell_12_premarket_after_q4_beat_eps_080_vs_079/"
     },
     {
-      "ticker": "TSLA",
-      "title": "Selling options is the way",
-      "score": 679,
-      "comments": 263,
+      "ticker": "AVGO",
+      "title": "Broadcom +5% after-hours on Q1 2026 earnings beat. Revenue +29% YoY to $19.3B, AI +106% to $8.4B, guides $22B Q2 vs $20.6B est, $10B buyback",
+      "score": 298,
+      "comments": 50,
       "subreddit": "wallstreetbets",
-      "url": "https://reddit.com/r/wallstreetbets/comments/1ruwpkk/selling_options_is_the_way/"
+      "url": "https://reddit.com/r/wallstreetbets/comments/1rl47nl/broadcom_5_afterhours_on_q1_2026_earnings_beat/"
     },
     {
       "ticker": "ORCL",
       "title": "ORCL leaps are failing me",
-      "score": 14,
+      "score": 13,
       "comments": 50,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s7rno2/orcl_leaps_are_failing_me/"
@@ -857,7 +857,7 @@
     {
       "ticker": "ORCL",
       "title": "Red Every Fucking Day",
-      "score": 610,
+      "score": 611,
       "comments": 203,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s2p2sf/red_every_fucking_day/"
@@ -865,7 +865,7 @@
     {
       "ticker": "ORCL",
       "title": "full port orcl calls YOLO",
-      "score": 54,
+      "score": 51,
       "comments": 59,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1s2opd2/full_port_orcl_calls_yolo/"
@@ -873,7 +873,7 @@
     {
       "ticker": "CRM",
       "title": "Part 2: I now spent $13,000/year on Substack newsletters so you don't have to. Longer time horizons, more authors, better methodology.",
-      "score": 1832,
+      "score": 1829,
       "comments": 246,
       "subreddit": "wallstreetbets",
       "url": "https://reddit.com/r/wallstreetbets/comments/1rv9cva/part_2_i_now_spent_13000year_on_substack/"
@@ -897,61 +897,21 @@
   ],
   "sentiment": [
     {
-      "ticker": "NVDA",
-      "messages": 30,
-      "bullish": 9,
-      "bearish": 3,
-      "top_messages": [
-        {
-          "body": "$SPY $QQQ $TSLA $NVDA $BTC.X \n\nGET THE FUCK OUT BEFORE IT&#39;S TOO LATE!  -70% crash coming! \n\nTrum",
-          "sentiment": "Bearish"
-        },
-        {
-          "body": "$MSFT, $META, $NVDA   big Q1 earnings not going away for Oil",
-          "sentiment": "Bullish"
-        },
-        {
-          "body": "$NVDA -wink-",
-          "sentiment": "none"
-        }
-      ]
-    },
-    {
       "ticker": "MSFT",
       "messages": 30,
-      "bullish": 3,
+      "bullish": 4,
       "bearish": 2,
       "top_messages": [
         {
-          "body": "EXCLUSIVE: Swarmer CEO Compares Drone Software Battle To Microsoft-Apple PC Wars \n\n$SWMR $SHLD $ITA ",
-          "sentiment": "none"
+          "body": "$MSFT holding Green on a crazy market day, when market bounces this will rally with it",
+          "sentiment": "Bullish"
+        },
+        {
+          "body": "$MSFT where are the bulls saying $400 was a good price to buy??? \ud83d\udd2a\ud83e\ude78\nSub-Liberation day prices incomi",
+          "sentiment": "Bearish"
         },
         {
           "body": "$MSFT",
-          "sentiment": "none"
-        },
-        {
-          "body": "$MSFT, $META, $NVDA   big Q1 earnings not going away for Oil",
-          "sentiment": "Bullish"
-        }
-      ]
-    },
-    {
-      "ticker": "GOOG",
-      "messages": 30,
-      "bullish": 4,
-      "bearish": 3,
-      "top_messages": [
-        {
-          "body": "Bill Ackman just spoke so we are at or near the bottom. Every time this guy talks/cries stocks rgoes",
-          "sentiment": "none"
-        },
-        {
-          "body": "Google Rolls Out AI-Driven EV Features, Bringing Smart Battery Forecasts And Charging Stops\n\n$GOOGL ",
-          "sentiment": "none"
-        },
-        {
-          "body": "$WMT $COST HAVE ALMOST DOUBLE THE PE OF $META $GOOG $AMZN",
           "sentiment": "none"
         }
       ]
@@ -959,19 +919,59 @@
     {
       "ticker": "AMZN",
       "messages": 30,
+      "bullish": 6,
+      "bearish": 3,
+      "top_messages": [
+        {
+          "body": "$AMZN big cap trend still steady and if the market stays risk on this can keep leading",
+          "sentiment": "Bullish"
+        },
+        {
+          "body": "$AMZN looks promising \ud83d\udfe2",
+          "sentiment": "Bullish"
+        },
+        {
+          "body": "$SPY $QQQ $NVDA $AMZN  \n \nI would like to see a good spike in the VIX but it&#39;s still in the Red.",
+          "sentiment": "none"
+        }
+      ]
+    },
+    {
+      "ticker": "NVDA",
+      "messages": 30,
+      "bullish": 7,
+      "bearish": 2,
+      "top_messages": [
+        {
+          "body": "$NVDA hell ya.  This guy isn\u2019t a ped@. That for sure.  All u non-ped@s raise your hands. We have to ",
+          "sentiment": "none"
+        },
+        {
+          "body": "$NVDA The researched consensus from Wall Street analysts and independent models (as of March 30, 202",
+          "sentiment": "Bullish"
+        },
+        {
+          "body": "$NVDA I personally would like to punch that fucking trump right in the mouth",
+          "sentiment": "none"
+        }
+      ]
+    },
+    {
+      "ticker": "GOOG",
+      "messages": 30,
       "bullish": 5,
       "bearish": 3,
       "top_messages": [
         {
-          "body": "$SPY  $AMZN and $META trying to prop and failing. If thry turn around too, watch out",
-          "sentiment": "Bearish"
+          "body": "$MU knows how to willfully steal \u2019Seminal Patents 912\u2019 &amp; more\u2019  \n \nMicron ditched their R&amp;D ",
+          "sentiment": "Bullish"
         },
         {
           "body": "Bill Ackman just spoke so we are at or near the bottom. Every time this guy talks/cries stocks rgoes",
           "sentiment": "none"
         },
         {
-          "body": "$NVDA there is no manipulation bro. The leader of the country is a senile RACIST liar ped@ and war M",
+          "body": "Google Rolls Out AI-Driven EV Features, Bringing Smart Battery Forecasts And Charging Stops\n\n$GOOGL ",
           "sentiment": "none"
         }
       ]
@@ -983,15 +983,15 @@
       "bearish": 6,
       "top_messages": [
         {
-          "body": "$COHR CEO of Coherent was the CEO of $LSCC and brought it from $8 to $80 a share\n\nHe was also previo",
-          "sentiment": "Bullish"
-        },
-        {
-          "body": "$AVGO tell that to the hedge funds to stop fucken with this and the whole market !  Nothing to do wi",
+          "body": "$AVGO 2027 fy estimates now at $17.84.",
           "sentiment": "none"
         },
         {
-          "body": "I GUESS Claude is replacing all software cyber and now CHIPS. $MU $NVDA $AVGO $LRCX",
+          "body": "$AVGO you are still here, still chasing AVGO for 2 years.",
+          "sentiment": "Bullish"
+        },
+        {
+          "body": "$AVGO   Micron is down 8% today !!!!  Maybe AVGO is \u201clucky\u201d with just 2.5%. But going below 300 with",
           "sentiment": "none"
         }
       ]
@@ -1003,15 +1003,55 @@
       "bearish": 8,
       "top_messages": [
         {
-          "body": "$MSFT, $META, $NVDA   big Q1 earnings not going away for Oil",
-          "sentiment": "Bullish"
-        },
-        {
-          "body": "$META strong big tech, just keeping it simple.",
+          "body": "$META One of the stronger names today.",
           "sentiment": "none"
         },
         {
-          "body": "$META the pumping lasted just 4 hours this time. Lube up permabulls, you&#39;re gonna need when fund",
+          "body": "$META looks like they toying with us",
+          "sentiment": "none"
+        },
+        {
+          "body": "$MSFT, $META, $NVDA   big Q1 earnings not going away for Oil",
+          "sentiment": "Bullish"
+        }
+      ]
+    },
+    {
+      "ticker": "TSLA",
+      "messages": 30,
+      "bullish": 3,
+      "bearish": 10,
+      "top_messages": [
+        {
+          "body": "$TSLA remember. jensen never had to beg shreholders to hold on to their stocks with promises of mass",
+          "sentiment": "none"
+        },
+        {
+          "body": "where skepticism comes in for $TSLA :\nScaling humanoid robots is harder than EV manufacturing\nAI + h",
+          "sentiment": "none"
+        },
+        {
+          "body": "$TSLA 13 months in a row of declining sales. Tesler is finished in Europe.",
+          "sentiment": "none"
+        }
+      ]
+    },
+    {
+      "ticker": "ORCL",
+      "messages": 30,
+      "bullish": 10,
+      "bearish": 1,
+      "top_messages": [
+        {
+          "body": "$ORCL steady tech company, just keeping it simple.",
+          "sentiment": "none"
+        },
+        {
+          "body": "$ORCL",
+          "sentiment": "none"
+        },
+        {
+          "body": "$CRWV w/weak hands already shaken out and entrenched Longs doubling up, that $88.75 Gapfill could be",
           "sentiment": "none"
         }
       ]
@@ -1023,75 +1063,15 @@
       "bearish": 4,
       "top_messages": [
         {
+          "body": "Don&#39;t expect $AMD to stay &lt;$200 for very long... very bullish net flow divergence today and p",
+          "sentiment": "none"
+        },
+        {
+          "body": "$AMD active in semis, just keeping an eye.",
+          "sentiment": "none"
+        },
+        {
           "body": "$COHR CEO of Coherent was the CEO of $LSCC and brought it from $8 to $80 a share\n\nHe was also previo",
-          "sentiment": "Bullish"
-        },
-        {
-          "body": "$AMD the real war hasn&#39;t even started yet",
-          "sentiment": "none"
-        },
-        {
-          "body": "$AMD",
-          "sentiment": "none"
-        }
-      ]
-    },
-    {
-      "ticker": "TSLA",
-      "messages": 30,
-      "bullish": 5,
-      "bearish": 7,
-      "top_messages": [
-        {
-          "body": "$TSLA $100 soon",
-          "sentiment": "Bearish"
-        },
-        {
-          "body": "$SPY $QQQ $TSLA $NVDA $BTC.X \n\nGET THE FUCK OUT BEFORE IT&#39;S TOO LATE!  -70% crash coming! \n\nTrum",
-          "sentiment": "Bearish"
-        },
-        {
-          "body": "$TSLA You&#39;d think with gas prices this high, an increase in Tesla demand would raise the stock p",
-          "sentiment": "none"
-        }
-      ]
-    },
-    {
-      "ticker": "ORCL",
-      "messages": 30,
-      "bullish": 12,
-      "bearish": 1,
-      "top_messages": [
-        {
-          "body": "$CRWV w/weak hands already shaken out and entrenched Longs doubling up, that $88.75 Gapfill could be",
-          "sentiment": "none"
-        },
-        {
-          "body": "$ORCL the only red one in the software sector",
-          "sentiment": "none"
-        },
-        {
-          "body": "$ORCL close to the bottom here. I\u2019m grabbing more shares",
-          "sentiment": "Bullish"
-        }
-      ]
-    },
-    {
-      "ticker": "PLTR",
-      "messages": 30,
-      "bullish": 7,
-      "bearish": 8,
-      "top_messages": [
-        {
-          "body": "$PLTR hold through all the noise\n\nhttps://stocks.apple.com/AGWGjp23qTtSV2vP7uzArLQ",
-          "sentiment": "none"
-        },
-        {
-          "body": "$PLTR still in play, just observing calmly.",
-          "sentiment": "none"
-        },
-        {
-          "body": "$PLTR I guess I\u2019m waiting for $125 to buy more, can\u2019t fight algos",
           "sentiment": "Bullish"
         }
       ]
@@ -1117,6 +1097,26 @@
       ]
     },
     {
+      "ticker": "PLTR",
+      "messages": 30,
+      "bullish": 7,
+      "bearish": 9,
+      "top_messages": [
+        {
+          "body": "$PLTR sells off with tech but doesn&#39;t go up with tech, these markets are so dumb lol",
+          "sentiment": "none"
+        },
+        {
+          "body": "$PLTR \n \nnot a good look",
+          "sentiment": "Bearish"
+        },
+        {
+          "body": "$PLTR we bouncing!! 155 next!",
+          "sentiment": "Bullish"
+        }
+      ]
+    },
+    {
       "ticker": "NET",
       "messages": 30,
       "bullish": 8,
@@ -1137,41 +1137,41 @@
       ]
     },
     {
-      "ticker": "ANET",
+      "ticker": "CRWD",
       "messages": 30,
-      "bullish": 4,
+      "bullish": 6,
       "bearish": 1,
       "top_messages": [
+        {
+          "body": "$CRWD $PANW $FTNT",
+          "sentiment": "none"
+        },
+        {
+          "body": ". Time to Jump on the CrowdStrike Bandwagon? $CRWD #MarketRecon .. https://pro.thestreet.com/trade-i",
+          "sentiment": "none"
+        },
+        {
+          "body": "CrowdStrike Jumps As Analyst Flags 20% Upside Amid AI Fears $CRWD https://talkmarkets.com/article/05",
+          "sentiment": "none"
+        }
+      ]
+    },
+    {
+      "ticker": "ANET",
+      "messages": 30,
+      "bullish": 5,
+      "bearish": 1,
+      "top_messages": [
+        {
+          "body": "$ANET pos still red",
+          "sentiment": "Bullish"
+        },
         {
           "body": "$ANET honestly. Will this end? Company is as sound as it was at $165",
           "sentiment": "Bullish"
         },
         {
           "body": "$ANET Sold, AI sell off will hold it down for the bearmarket rally i was lookin for .. byeeeee",
-          "sentiment": "none"
-        },
-        {
-          "body": "$ANET just broke below this range.\n\nMaybe support at 114, but there\u2019s better support at 84 :/\n\nNot g",
-          "sentiment": "none"
-        }
-      ]
-    },
-    {
-      "ticker": "CRWD",
-      "messages": 30,
-      "bullish": 7,
-      "bearish": 1,
-      "top_messages": [
-        {
-          "body": "CrowdStrike Jumps As Analyst Flags 20% Upside Amid AI Fears $CRWD https://talkmarkets.com/article/05",
-          "sentiment": "none"
-        },
-        {
-          "body": "$CRWD don&#39;t be a sucker and buy this piece of shit company. If you wanna overpay for something b",
-          "sentiment": "none"
-        },
-        {
-          "body": "$CRWD fell ~6% last Friday on AI disruption fears. \n\ud83d\udcc9 Shares drop after reports of Anthropic\u2019s \u201cClau",
           "sentiment": "none"
         }
       ]
@@ -1207,13 +1207,13 @@
     {
       "symbol": "MU",
       "title": "Micron Technology Inc",
-      "watchlist_count": 184843,
+      "watchlist_count": 184851,
       "in_index": false
     },
     {
       "symbol": "IREN",
       "title": "IREN Limited",
-      "watchlist_count": 37652,
+      "watchlist_count": 37655,
       "in_index": false
     },
     {
@@ -1231,7 +1231,7 @@
     {
       "symbol": "FNMA",
       "title": "Federal National Mortgage Association",
-      "watchlist_count": 17306,
+      "watchlist_count": 17315,
       "in_index": false
     },
     {
@@ -1249,7 +1249,7 @@
     {
       "symbol": "GLND",
       "title": "Greenland Energy Co.",
-      "watchlist_count": 785,
+      "watchlist_count": 789,
       "in_index": false
     },
     {
@@ -1261,7 +1261,7 @@
     {
       "symbol": "WULF",
       "title": "TeraWulf Inc",
-      "watchlist_count": 24426,
+      "watchlist_count": 24425,
       "in_index": false
     },
     {
@@ -1285,7 +1285,7 @@
     {
       "symbol": "SOXS",
       "title": "Direxion Daily Semiconductor Bear 3X Shares",
-      "watchlist_count": 14574,
+      "watchlist_count": 14576,
       "in_index": false
     },
     {
@@ -1315,7 +1315,7 @@
     {
       "symbol": "SMH",
       "title": "VanEck Semiconductor ETF",
-      "watchlist_count": 15247,
+      "watchlist_count": 15248,
       "in_index": false
     },
     {
@@ -1339,7 +1339,7 @@
     {
       "symbol": "NBIS",
       "title": "Nebius Group N.V. ",
-      "watchlist_count": 36858,
+      "watchlist_count": 36860,
       "in_index": false
     },
     {
@@ -1369,7 +1369,7 @@
     {
       "symbol": "IMSR",
       "title": "Terrestrial Energy Inc.",
-      "watchlist_count": 4442,
+      "watchlist_count": 4443,
       "in_index": false
     },
     {
