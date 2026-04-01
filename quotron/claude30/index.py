@@ -13,6 +13,9 @@ Rebalance history:
 - v1 (2026-03-29): Initial composition
 - v2 (2026-03-30): Added MU (HBM memory), CRWV (GPU cloud), ALAB (interconnect).
   Removed BBAI, RGTI, SOUN (speculative, not core infra). Trimmed ORCL, INTC.
+- v3 (2026-04-01): Added TSM (foundry monopoly — fabricates all AI chips).
+  Removed IONQ (quantum is pre-revenue, not AI infra today). Trimmed INTC 1.0→0.5.
+  Bumped PATH 1.5→2.0 (AI automation revenue growing).
 """
 
 # --- Index Constituents ---
@@ -24,7 +27,8 @@ CLAUDE_30 = {
     "AVGO":  {"name": "Broadcom",         "sector": "silicon",    "weight": 5.0},
     "MRVL":  {"name": "Marvell",          "sector": "silicon",    "weight": 2.0},
     "MU":    {"name": "Micron",           "sector": "silicon",    "weight": 2.0},
-    "INTC":  {"name": "Intel",            "sector": "silicon",    "weight": 1.0},
+    "TSM":   {"name": "TSMC",             "sector": "silicon",    "weight": 3.0},
+    "INTC":  {"name": "Intel",            "sector": "silicon",    "weight": 0.5},
 
     # Cloud & Compute (the ocean)
     "AMZN":  {"name": "Amazon",           "sector": "cloud",      "weight": 8.0},
@@ -56,9 +60,8 @@ CLAUDE_30 = {
     "HPE":   {"name": "HPE",              "sector": "hardware",   "weight": 1.0},
 
     # Emerging AI (the fry)
-    "PATH":  {"name": "UiPath",           "sector": "emerging",   "weight": 1.5},
+    "PATH":  {"name": "UiPath",           "sector": "emerging",   "weight": 2.0},
     "RKLB":  {"name": "Rocket Lab",       "sector": "emerging",   "weight": 1.5},
-    "IONQ":  {"name": "IonQ",             "sector": "emerging",   "weight": 1.0},
 }
 
 TICKERS = list(CLAUDE_30.keys())
