@@ -76,6 +76,11 @@
     </div>
   </div>
 
+  <div class="section" style="margin-top: 16px;">
+    <h2>Sector Performance</h2>
+    <div id="sectors"></div>
+  </div>
+
   <div class="section" id="sentiment-section" style="display:none; margin-top: 16px;">
     <h2>StockTwits Sentiment</h2>
     <div id="sentiment"></div>
@@ -191,6 +196,31 @@ function render(data, history) {
   document.getElementById('social').innerHTML = social.length ? social.map(p =>
     `<div class="social"><span class="score">▲${p.score}</span><span class="hl-ticker">${p.ticker}</span><span class="sub">r/${p.subreddit}</span><a href="${p.url}" target="_blank">${p.title.slice(0,60)}</a></div>`
   ).join('') : '<div class="no-data">no posts</div>';
+
+  // Sector performance
+  const sectorData = {};
+  for (const q of quotes) {
+    const info = data.index[q.ticker] || {};
+    const sec = info.sector || 'other';
+    if (!sectorData[sec]) sectorData[sec] = { weight: 0, contribution: 0, stocks: 0 };
+    sectorData[sec].weight += info.weight || 0;
+    sectorData[sec].stocks++;
+  }
+  const sectorColors = {silicon:'#ffa198',cloud:'#79c0ff',software:'#d2a8ff',infra:'#e3b341',hardware:'#a5d6ff',emerging:'#7ee787'};
+  document.getElementById('sectors').innerHTML = Object.entries(sectorData)
+    .sort((a,b) => b[1].weight - a[1].weight)
+    .map(([sec, d]) => {
+      const pct = totalWeight > 0 ? (d.weight / totalWeight * 100).toFixed(1) : '0';
+      const color = sectorColors[sec] || '#484f58';
+      return `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #21262d">
+        <span style="color:${color};font-weight:bold;min-width:140px;font-size:12px">${SECTOR_NAMES[sec] || sec}</span>
+        <div style="flex:1;background:#21262d;height:12px;border-radius:3px;overflow:hidden">
+          <div style="width:${pct}%;background:${color}44;height:100%"></div>
+        </div>
+        <span style="color:#484f58;font-size:11px;min-width:40px;text-align:right">${pct}%</span>
+        <span style="color:#484f58;font-size:11px;min-width:30px;text-align:right">${d.stocks}stk</span>
+      </div>`;
+    }).join('');
 
   // Sentiment bars
   const sentiment = (data.sentiment || []).sort((a,b) => (b.bullish+b.bearish) - (a.bullish+a.bearish));
