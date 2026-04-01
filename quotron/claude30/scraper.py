@@ -98,7 +98,7 @@ def scrape_quotes(s: Shoal, tickers: list[str]) -> list[Quote]:
             meta = result["meta"]
 
             price = meta.get("regularMarketPrice", 0)
-            prev_close = meta.get("previousClose", price)
+            prev_close = meta.get("chartPreviousClose", meta.get("previousClose", price))
             change = price - prev_close
             change_pct = (change / prev_close * 100) if prev_close else 0
             volume = meta.get("regularMarketVolume", 0)
