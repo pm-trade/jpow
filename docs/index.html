@@ -127,6 +127,28 @@ function render(data, history) {
     <div class="stat-box"><div class="stat-val">${(data.sentiment||[]).length}</div><div class="stat-label">sentiment</div></div>
   `;
 
+  // Build per-ticker sparkline data from history
+  const sparklines = {};
+  if (history && history.points) {
+    const recent = history.points.slice(-20);
+    for (const pt of recent) {
+      for (const [t, p] of Object.entries(pt.prices || {})) {
+        if (!sparklines[t]) sparklines[t] = [];
+        sparklines[t].push(p);
+      }
+    }
+  }
+
+  function miniSparkline(prices) {
+    if (!prices || prices.length < 2) return '';
+    const min = Math.min(...prices), max = Math.max(...prices);
+    const range = max - min || 1;
+    const w = 60, h = 16;
+    const pts = prices.map((p, i) => `${(i/(prices.length-1))*w},${h-(((p-min)/range)*h)}`).join(' ');
+    const color = prices[prices.length-1] >= prices[0] ? '#3fb950' : '#f85149';
+    return `<svg width="${w}" height="${h}" style="vertical-align:middle"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"/></svg>`;
+  }
+
   // Quote cards
   const sorted = [...quotes].sort((a, b) => (data.index[b.ticker]?.weight || 0) - (data.index[a.ticker]?.weight || 0));
   const totalWeight = Object.values(data.index).reduce((s, i) => s + (i.weight || 0), 0);
@@ -136,13 +158,17 @@ function render(data, history) {
     const dir = q.change >= 0 ? '+' : '';
     const vol = q.volume > 1e6 ? (q.volume/1e6).toFixed(1)+'M' : (q.volume/1e3).toFixed(0)+'K';
     const wPct = totalWeight > 0 ? ((info.weight || 0) / totalWeight * 100).toFixed(1) : '0';
+    const spark = miniSparkline(sparklines[q.ticker]);
     return `<div class="card">
       <div style="display:flex;justify-content:space-between;align-items:baseline">
         <div class="ticker">${q.ticker}</div>
         <div style="color:#484f58;font-size:10px;font-weight:bold">${wPct}%</div>
       </div>
       <div class="name">${info.name || ''}</div>
-      <div class="price ${cls}">$${q.price.toFixed(2)}</div>
+      <div style="display:flex;justify-content:space-between;align-items:baseline">
+        <div class="price ${cls}">$${q.price.toFixed(2)}</div>
+        ${spark}
+      </div>
       <div class="change ${cls}">${dir}${q.change_pct.toFixed(2)}%</div>
       <div class="volume">vol ${vol}</div>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
