@@ -127,8 +127,22 @@ function render(data, history) {
   const idx = data.index_summary || {};
   const idxCls = (idx.change || 0) >= 0 ? 'up' : 'down';
   const idxDir = (idx.change || 0) >= 0 ? '+' : '';
+  // Calculate intraday change from today's first point
+  let dayChange = '';
+  if (history && history.points && history.points.length > 1) {
+    const today = new Date().toISOString().slice(0, 10);
+    const todayPts = history.points.filter(p => p.t.startsWith(today));
+    if (todayPts.length > 1) {
+      const openVal = todayPts[0].index;
+      const nowVal = todayPts[todayPts.length - 1].index;
+      const dc = ((nowVal - openVal) / openVal * 100);
+      const dcCls = dc >= 0 ? 'up' : 'down';
+      dayChange = `<div class="stat-box"><div class="stat-sm ${dcCls}">${dc >= 0 ? '+' : ''}${dc.toFixed(2)}%</div><div class="stat-label">today</div></div>`;
+    }
+  }
   document.getElementById('stats').innerHTML = `
     <div class="stat-box"><div class="stat-val ${idxCls}">${(idx.value||1000).toFixed(1)}</div><div class="stat-label">index ${idxDir}${(idx.change_pct||0).toFixed(2)}%</div></div>
+    ${dayChange}
     <div class="stat-box"><div class="stat-val">${quotes.length}</div><div class="stat-label">stocks</div></div>
     <div class="stat-box"><div class="stat-val up">${gainers}</div><div class="stat-label">gainers</div></div>
     <div class="stat-box"><div class="stat-val down">${losers}</div><div class="stat-label">losers</div></div>
