@@ -86,6 +86,11 @@
     <div id="sentiment"></div>
   </div>
 
+  <div class="section" id="trending-section" style="display:none; margin-top: 16px;">
+    <h2>Trending Outside Index</h2>
+    <div id="trending"></div>
+  </div>
+
   <p class="footer">
     data scraped via <a href="https://github.com/we-be/shoal">Shoal</a> browser orchestration
     · <a href="https://github.com/we-be/jpow">source</a>
@@ -237,6 +242,23 @@ function render(data, history) {
         </div>
         <span style="color:#484f58;font-size:11px;min-width:70px;text-align:right">${s.bullish}B/${s.bearish}b</span>
         <span style="color:${barColor};font-size:11px;font-weight:bold;min-width:35px">${pct}%</span>
+      </div>`;
+    }).join('');
+  }
+
+  // Trending tickers outside the index
+  const trending = (data.trending || []).filter(t => !t.in_index).slice(0, 10);
+  if (trending.length) {
+    document.getElementById('trending-section').style.display = '';
+    document.getElementById('trending').innerHTML = trending.map(t => {
+      const w = Math.min(t.watchlist_count / 2000, 100);
+      return `<div style="display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid #21262d">
+        <span class="hl-ticker" style="min-width:50px">$${t.symbol}</span>
+        <div style="flex:1;background:#21262d;height:8px;border-radius:3px;overflow:hidden">
+          <div style="width:${w}%;background:#58a6ff44;height:100%"></div>
+        </div>
+        <span style="color:#484f58;font-size:11px;min-width:70px;text-align:right">${(t.watchlist_count/1000).toFixed(1)}K</span>
+        <span style="color:#8b949e;font-size:11px">${t.title.slice(0,30)}</span>
       </div>`;
     }).join('');
   }
