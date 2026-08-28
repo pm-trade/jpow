@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Claude-30 Index</title>
+<title>GPU Prices — buy vs rent</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: #0a0e17; color: #c9d1d9; font-family: 'SF Mono', 'Cascadia Code', monospace; font-size: 13px; }
@@ -11,357 +11,143 @@
   h1 { color: #58a6ff; font-size: 20px; }
   .subtitle { color: #484f58; font-size: 12px; margin-bottom: 20px; }
   .updated { color: #484f58; font-size: 11px; position: absolute; top: 20px; right: 20px; }
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-bottom: 20px; }
-  .card { background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 12px; cursor: default; }
-  .card:hover { border-color: #388bfd; }
-  .ticker { font-size: 14px; font-weight: bold; color: #58a6ff; }
-  .name { color: #484f58; font-size: 11px; margin-bottom: 4px; }
-  .price { font-size: 18px; font-weight: bold; }
-  .change { font-size: 12px; font-weight: bold; }
-  .up { color: #3fb950; }
-  .down { color: #f85149; }
-  .flat { color: #484f58; }
-  .volume { color: #484f58; font-size: 11px; }
-  .sector-tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-top: 4px; }
-  .sector-silicon { background: #da3633aa; color: #ffa198; }
-  .sector-cloud { background: #1f6febaa; color: #79c0ff; }
-  .sector-software { background: #8957e5aa; color: #d2a8ff; }
-  .sector-infra { background: #d29922aa; color: #e3b341; }
-  .sector-hardware { background: #388bfdaa; color: #a5d6ff; }
-  .sector-emerging { background: #3fb950aa; color: #7ee787; }
+  .nav { margin-bottom: 16px; }
+  .nav a { color: #484f58; text-decoration: none; margin-right: 14px; font-size: 11px; }
+  .nav a:hover, .nav a.on { color: #58a6ff; }
   .section { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
-  .section h2 { color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
-  .headline { padding: 6px 0; border-bottom: 1px solid #21262d; }
-  .headline:last-child { border-bottom: none; }
-  .headline .hl-ticker { color: #58a6ff; font-weight: bold; margin-right: 8px; }
-  .headline .hl-source { color: #484f58; font-size: 11px; }
-  .headline a { color: #c9d1d9; text-decoration: none; }
-  .headline a:hover { color: #58a6ff; }
-  .social { padding: 6px 0; border-bottom: 1px solid #21262d; display: flex; gap: 12px; align-items: baseline; }
-  .social:last-child { border-bottom: none; }
-  .social .score { color: #3fb950; font-weight: bold; min-width: 50px; text-align: right; }
-  .social .sub { color: #484f58; font-size: 11px; min-width: 130px; }
-  .no-data { color: #21262d; font-style: italic; padding: 20px; text-align: center; }
+  .section h2 { color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .section .hint { color: #484f58; font-size: 11px; margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; margin-bottom: 16px; }
+  .card { background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 12px; }
+  .card:hover { border-color: #388bfd; }
+  .model { font-size: 14px; font-weight: bold; color: #58a6ff; }
+  .meta { color: #484f58; font-size: 11px; margin-bottom: 6px; }
+  .price { font-size: 18px; font-weight: bold; }
+  .sub { color: #484f58; font-size: 11px; }
+  .up { color: #3fb950; } .down { color: #f85149; } .flat { color: #484f58; }
+  .tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-top: 6px; }
+  .tier-consumer { background: #3fb950aa; color: #7ee787; }
+  .tier-workstation { background: #d29922aa; color: #e3b341; }
+  .tier-datacenter { background: #1f6febaa; color: #79c0ff; }
+  table { width: 100%; border-collapse: collapse; }
+  th { color: #484f58; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; text-align: right; padding: 4px 8px; border-bottom: 1px solid #21262d; font-weight: normal; }
+  th:first-child, td:first-child { text-align: left; }
+  td { padding: 6px 8px; border-bottom: 1px solid #21262d; text-align: right; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #1c2128; }
+  .name-cell { color: #58a6ff; font-weight: bold; }
+  .bar { display: inline-block; height: 6px; background: #1f6feb; border-radius: 2px; vertical-align: middle; }
   .stats { display: flex; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
   .stat-box { text-align: center; }
   .stat-val { font-size: 24px; font-weight: bold; color: #58a6ff; }
   .stat-label { font-size: 11px; color: #484f58; }
+  .no-data { color: #21262d; font-style: italic; padding: 20px; text-align: center; }
   .footer { text-align: center; color: #21262d; font-size: 11px; margin-top: 30px; }
   .footer a { color: #484f58; }
 </style>
 </head>
 <body>
 <div class="container">
-  <h1>Claude-30 Index</h1>
-  <div class="nav" style="margin:6px 0 0"><a href="gpu.html" style="color:#484f58;text-decoration:none;font-size:11px">GPU Prices →</a></div>
-  <p class="subtitle">30 stocks tracking the AI infrastructure stack</p>
   <div class="updated" id="updated"></div>
+  <h1>GPU Prices</h1>
+  <div class="subtitle">what a card costs to buy, what an hour of one costs to rent</div>
+  <div class="nav"><a href="index.html">← Claude-30 Index</a><a href="gpu.html" class="on">GPU Prices</a></div>
 
   <div class="stats" id="stats"></div>
 
-  <div class="section" id="index-chart-section" style="display:none; margin-bottom: 16px;">
-    <h2>Claude-30 Index Performance</h2>
-    <canvas id="index-chart" style="width:100%!important; height:150px!important;"></canvas>
+  <div class="section">
+    <h2>Buy vs Rent</h2>
+    <div class="hint">breakeven = retail ÷ hourly rate. buying wins only past this much use.</div>
+    <div id="breakeven"><div class="no-data">loading…</div></div>
   </div>
 
-  <div class="grid" id="quotes"></div>
-
-  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
-    <div class="section">
-      <h2>News</h2>
-      <div id="news"><div class="no-data">loading...</div></div>
-    </div>
-    <div class="section">
-      <h2>Social</h2>
-      <div id="social"><div class="no-data">loading...</div></div>
-    </div>
+  <div class="section">
+    <h2>Retail</h2>
+    <div class="hint">cheapest in-stock listing on Newegg, against MSRP</div>
+    <div id="retail"><div class="no-data">loading…</div></div>
   </div>
 
-  <div class="section" style="margin-top: 16px;">
-    <h2>Sector Performance</h2>
-    <div id="sectors"></div>
+  <div class="section">
+    <h2>Rental</h2>
+    <div class="hint">on-demand vs the interruptible auction floor across vast.ai and RunPod</div>
+    <div id="rental"><div class="no-data">loading…</div></div>
   </div>
 
-  <div class="section" id="sentiment-section" style="display:none; margin-top: 16px;">
-    <h2>StockTwits Sentiment</h2>
-    <div id="sentiment"></div>
+  <div class="footer">
+    data from vast.ai, RunPod and Newegg ·
+    <a href="https://github.com/pm-trade/jpow">we-be/jpow</a>
   </div>
-
-  <div class="section" id="trending-section" style="display:none; margin-top: 16px;">
-    <h2>Trending Outside Index</h2>
-    <div id="trending"></div>
-  </div>
-
-  <p class="footer">
-    <a href="https://github.com/pm-trade/jpow">source</a>
-  </p>
 </div>
 
 <script>
-const SECTOR_NAMES = {
-  silicon: 'GPU & Silicon', cloud: 'Cloud & Compute', software: 'AI Software',
-  infra: 'Infrastructure', hardware: 'Hardware', emerging: 'Emerging AI'
-};
+const money = n => '$' + n.toLocaleString('en-US', {maximumFractionDigits: 0});
+const rate  = n => '$' + n.toFixed(3);
+const cls   = n => n > 0 ? 'down' : n < 0 ? 'up' : 'flat';  // cheaper is good
+const pct   = n => (n > 0 ? '+' : '') + n.toFixed(0) + '%';
 
-async function load() {
-  try {
-    const [dataResp, histResp] = await Promise.all([
-      fetch('data.json'),
-      fetch('history.json').catch(() => null),
-    ]);
-    const data = await dataResp.json();
-    const history = histResp ? await histResp.json().catch(() => null) : null;
-    render(data, history);
-  } catch (e) {
-    document.getElementById('quotes').innerHTML = '<div class="no-data">no data yet — run the scraper with --export docs/data.json</div>';
-  }
-}
+fetch('gpu.json').then(r => r.json()).then(d => {
+  const gpus = Object.values(d.gpus);
+  document.getElementById('updated').textContent = 'updated ' + new Date(d.updated).toLocaleString();
 
-function render(data, history) {
-  document.getElementById('updated').textContent = 'updated ' + new Date(data.updated).toLocaleString();
+  // --- headline stats ---
+  const h100 = d.gpus['H100 SXM'] || {};
+  const c5090 = d.gpus['RTX 5090'] || {};
+  const priced = gpus.filter(g => g.rent).length;
+  const stats = [
+    h100.bid  ? [rate(h100.bid) + '/hr', 'H100 bid floor'] : null,
+    h100.rent ? [rate(h100.rent) + '/hr', 'H100 on-demand'] : null,
+    c5090.retail ? [money(c5090.retail), 'RTX 5090 retail'] : null,
+    c5090.premium_pct != null ? [pct(c5090.premium_pct), '5090 vs MSRP'] : null,
+    [priced + '/' + gpus.length, 'models priced'],
+  ].filter(Boolean);
+  document.getElementById('stats').innerHTML = stats.map(([v, l]) =>
+    `<div class="stat-box"><div class="stat-val">${v}</div><div class="stat-label">${l}</div></div>`).join('');
 
-  // Stats
-  const quotes = data.quotes || [];
-  const gainers = quotes.filter(q => q.change > 0).length;
-  const losers = quotes.filter(q => q.change < 0).length;
-  const idx = data.index_summary || {};
-  const idxCls = (idx.change || 0) >= 0 ? 'up' : 'down';
-  const idxDir = (idx.change || 0) >= 0 ? '+' : '';
-  // Calculate intraday change from today's first point
-  let dayChange = '';
-  if (history && history.points && history.points.length > 1) {
-    const today = new Date().toISOString().slice(0, 10);
-    const todayPts = history.points.filter(p => p.t.startsWith(today));
-    if (todayPts.length > 1) {
-      const openVal = todayPts[0].index;
-      const nowVal = todayPts[todayPts.length - 1].index;
-      const dc = ((nowVal - openVal) / openVal * 100);
-      const dcCls = dc >= 0 ? 'up' : 'down';
-      dayChange = `<div class="stat-box"><div class="stat-sm ${dcCls}">${dc >= 0 ? '+' : ''}${dc.toFixed(2)}%</div><div class="stat-label">today</div></div>`;
-    }
-  }
-  document.getElementById('stats').innerHTML = `
-    <div class="stat-box"><div class="stat-val ${idxCls}">${(idx.value||1000).toFixed(1)}</div><div class="stat-label">index ${idxDir}${(idx.change_pct||0).toFixed(2)}%</div></div>
-    ${dayChange}
-    <div class="stat-box"><div class="stat-val">${quotes.length}</div><div class="stat-label">stocks</div></div>
-    <div class="stat-box"><div class="stat-val up">${gainers}</div><div class="stat-label">gainers</div></div>
-    <div class="stat-box"><div class="stat-val down">${losers}</div><div class="stat-label">losers</div></div>
-    <div class="stat-box"><div class="stat-val">${(data.news||[]).length}</div><div class="stat-label">headlines</div></div>
-    <div class="stat-box"><div class="stat-val">${(data.social||[]).length}</div><div class="stat-label">posts</div></div>
-    <div class="stat-box"><div class="stat-val">${(data.sentiment||[]).length}</div><div class="stat-label">sentiment</div></div>
-  `;
+  // --- buy vs rent ---
+  const be = gpus.filter(g => g.breakeven_hours).sort((a, b) => a.breakeven_hours - b.breakeven_hours);
+  document.getElementById('breakeven').innerHTML = be.length ? `<table>
+    <thead><tr><th>model</th><th>buy</th><th>rent/hr</th><th>bid/hr</th>
+      <th>breakeven</th><th>at bid rate</th></tr></thead>
+    <tbody>${be.map(g => `<tr>
+      <td class="name-cell">${g.label}</td>
+      <td>${money(g.retail)}</td>
+      <td>${rate(g.rent)}</td>
+      <td>${g.bid ? rate(g.bid) : '—'}</td>
+      <td>${g.breakeven_hours.toLocaleString()}h <span class="sub">(${g.breakeven_days.toLocaleString()}d)</span></td>
+      <td>${g.breakeven_hours_bid ? g.breakeven_hours_bid.toLocaleString() + 'h' : '—'}</td>
+    </tr>`).join('')}</tbody></table>` : '<div class="no-data">no overlap between retail and rental</div>';
 
-  // Build per-ticker sparkline data from history
-  const sparklines = {};
-  if (history && history.points) {
-    const recent = history.points.slice(-20);
-    for (const pt of recent) {
-      for (const [t, p] of Object.entries(pt.prices || {})) {
-        if (!sparklines[t]) sparklines[t] = [];
-        sparklines[t].push(p);
-      }
-    }
-  }
+  // --- retail cards ---
+  const shop = gpus.filter(g => g.retail);
+  document.getElementById('retail').innerHTML = shop.length ? '<div class="grid">' + shop.map(g => `
+    <div class="card">
+      <div class="model">${g.label}</div>
+      <div class="meta">${g.vram}GB · ${g.in_stock} in stock</div>
+      <div class="price">${money(g.retail)}</div>
+      <div class="sub">${g.msrp ? 'MSRP ' + money(g.msrp) : ''}
+        ${g.premium_pct != null ? `<span class="${cls(g.premium_pct)}">${pct(g.premium_pct)}</span>` : ''}</div>
+      <div class="tag tier-${g.tier}">${g.tier}</div>
+    </div>`).join('') + '</div>' : '<div class="no-data">no retail data</div>';
 
-  function miniSparkline(prices) {
-    if (!prices || prices.length < 2) return '';
-    const min = Math.min(...prices), max = Math.max(...prices);
-    const range = max - min || 1;
-    const w = 60, h = 16;
-    const pts = prices.map((p, i) => `${(i/(prices.length-1))*w},${h-(((p-min)/range)*h)}`).join(' ');
-    const color = prices[prices.length-1] >= prices[0] ? '#3fb950' : '#f85149';
-    return `<svg width="${w}" height="${h}" style="vertical-align:middle"><polyline points="${pts}" fill="none" stroke="${color}" stroke-width="1.5"/></svg>`;
-  }
-
-  // Quote cards
-  const sorted = [...quotes].sort((a, b) => (data.index[b.ticker]?.weight || 0) - (data.index[a.ticker]?.weight || 0));
-  const totalWeight = Object.values(data.index).reduce((s, i) => s + (i.weight || 0), 0);
-  document.getElementById('quotes').innerHTML = sorted.map(q => {
-    const info = data.index[q.ticker] || {};
-    const cls = q.change > 0 ? 'up' : q.change < 0 ? 'down' : 'flat';
-    const dir = q.change >= 0 ? '+' : '';
-    const vol = q.volume > 1e6 ? (q.volume/1e6).toFixed(1)+'M' : (q.volume/1e3).toFixed(0)+'K';
-    const wPct = totalWeight > 0 ? ((info.weight || 0) / totalWeight * 100).toFixed(1) : '0';
-    const spark = miniSparkline(sparklines[q.ticker]);
-    return `<div class="card">
-      <div style="display:flex;justify-content:space-between;align-items:baseline">
-        <div class="ticker">${q.ticker}</div>
-        <div style="color:#484f58;font-size:10px;font-weight:bold">${wPct}%</div>
-      </div>
-      <div class="name">${info.name || ''}</div>
-      <div style="display:flex;justify-content:space-between;align-items:baseline">
-        <div class="price ${cls}">$${q.price.toFixed(2)}</div>
-        ${spark}
-      </div>
-      <div class="change ${cls}">${dir}${q.change_pct.toFixed(2)}%</div>
-      <div class="volume">vol ${vol}</div>
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:4px">
-        <span class="sector-tag sector-${info.sector || ''}">${SECTOR_NAMES[info.sector] || ''}</span>
-        <div style="background:#21262d;border-radius:2px;height:4px;flex:1;margin-left:6px;overflow:hidden">
-          <div style="background:#58a6ff44;height:100%;width:${wPct}%"></div>
-        </div>
-      </div>
-    </div>`;
-  }).join('');
-
-  // News
-  const news = (data.news || []).slice(0, 20);
-  document.getElementById('news').innerHTML = news.length ? news.map(h =>
-    `<div class="headline"><span class="hl-ticker">${h.ticker}</span><a href="${h.url}" target="_blank">${h.title}</a> <span class="hl-source">${h.source}</span></div>`
-  ).join('') : '<div class="no-data">no headlines</div>';
-
-  // Social
-  const social = (data.social || []).sort((a,b) => b.score - a.score).slice(0, 15);
-  document.getElementById('social').innerHTML = social.length ? social.map(p =>
-    `<div class="social"><span class="score">▲${p.score}</span><span class="hl-ticker">${p.ticker}</span><span class="sub">r/${p.subreddit}</span><a href="${p.url}" target="_blank">${p.title.slice(0,60)}</a></div>`
-  ).join('') : '<div class="no-data">no posts</div>';
-
-  // Sector performance
-  const sectorData = {};
-  for (const q of quotes) {
-    const info = data.index[q.ticker] || {};
-    const sec = info.sector || 'other';
-    if (!sectorData[sec]) sectorData[sec] = { weight: 0, contribution: 0, stocks: 0 };
-    sectorData[sec].weight += info.weight || 0;
-    sectorData[sec].stocks++;
-  }
-  const sectorColors = {silicon:'#ffa198',cloud:'#79c0ff',software:'#d2a8ff',infra:'#e3b341',hardware:'#a5d6ff',emerging:'#7ee787'};
-  document.getElementById('sectors').innerHTML = Object.entries(sectorData)
-    .sort((a,b) => b[1].weight - a[1].weight)
-    .map(([sec, d]) => {
-      const pct = totalWeight > 0 ? (d.weight / totalWeight * 100).toFixed(1) : '0';
-      const color = sectorColors[sec] || '#484f58';
-      return `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #21262d">
-        <span style="color:${color};font-weight:bold;min-width:140px;font-size:12px">${SECTOR_NAMES[sec] || sec}</span>
-        <div style="flex:1;background:#21262d;height:12px;border-radius:3px;overflow:hidden">
-          <div style="width:${pct}%;background:${color}44;height:100%"></div>
-        </div>
-        <span style="color:#484f58;font-size:11px;min-width:40px;text-align:right">${pct}%</span>
-        <span style="color:#484f58;font-size:11px;min-width:30px;text-align:right">${d.stocks}stk</span>
-      </div>`;
-    }).join('');
-
-  // Sentiment bars
-  const sentiment = (data.sentiment || []).sort((a,b) => (b.bullish+b.bearish) - (a.bullish+a.bearish));
-  if (sentiment.length) {
-    document.getElementById('sentiment-section').style.display = '';
-    document.getElementById('sentiment').innerHTML = sentiment.map(s => {
-      const total = s.bullish + s.bearish;
-      const pct = total > 0 ? Math.round(s.bullish / total * 100) : 50;
-      const barColor = pct >= 60 ? '#3fb950' : pct <= 40 ? '#f85149' : '#d29922';
-      return `<div style="display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid #21262d">
-        <span class="hl-ticker" style="min-width:50px">${s.ticker}</span>
-        <div style="flex:1;display:flex;height:14px;border-radius:3px;overflow:hidden;background:#21262d">
-          <div style="width:${pct}%;background:${barColor};transition:width 0.3s"></div>
-        </div>
-        <span style="color:#484f58;font-size:11px;min-width:70px;text-align:right">${s.bullish}B/${s.bearish}b</span>
-        <span style="color:${barColor};font-size:11px;font-weight:bold;min-width:35px">${pct}%</span>
-      </div>`;
-    }).join('');
-  }
-
-  // Trending tickers outside the index
-  const trending = (data.trending || []).filter(t => !t.in_index).slice(0, 10);
-  if (trending.length) {
-    document.getElementById('trending-section').style.display = '';
-    document.getElementById('trending').innerHTML = trending.map(t => {
-      const w = Math.min(t.watchlist_count / 2000, 100);
-      return `<div style="display:flex;align-items:center;gap:8px;padding:3px 0;border-bottom:1px solid #21262d">
-        <span class="hl-ticker" style="min-width:50px">$${t.symbol}</span>
-        <div style="flex:1;background:#21262d;height:8px;border-radius:3px;overflow:hidden">
-          <div style="width:${w}%;background:#58a6ff44;height:100%"></div>
-        </div>
-        <span style="color:#484f58;font-size:11px;min-width:70px;text-align:right">${(t.watchlist_count/1000).toFixed(1)}K</span>
-        <span style="color:#8b949e;font-size:11px">${t.title.slice(0,30)}</span>
-      </div>`;
-    }).join('');
-  }
-
-  // Index chart
-  if (history) renderIndexChart(history);
-}
-
-function renderIndexChart(history) {
-  if (!history || !history.points || history.points.length < 2) return;
-  document.getElementById('index-chart-section').style.display = '';
-
-  const canvas = document.getElementById('index-chart');
-  const ctx = canvas.getContext('2d');
-  const dpr = window.devicePixelRatio || 1;
-  const rect = canvas.getBoundingClientRect();
-  canvas.width = rect.width * dpr;
-  canvas.height = rect.height * dpr;
-  ctx.scale(dpr, dpr);
-  const W = rect.width, H = rect.height;
-
-  const points = history.points;
-  const values = points.map(p => p.index);
-  const minVal = Math.min(...values) * 0.999;
-  const maxVal = Math.max(...values) * 1.001;
-  const range = maxVal - minVal || 1;
-
-  const pad = { l: 50, r: 10, t: 10, b: 25 };
-  const cw = W - pad.l - pad.r;
-  const ch = H - pad.t - pad.b;
-
-  // Grid
-  ctx.strokeStyle = '#21262d';
-  ctx.lineWidth = 1;
-  for (let i = 0; i <= 4; i++) {
-    const y = pad.t + (ch / 4) * i;
-    ctx.beginPath(); ctx.moveTo(pad.l, y); ctx.lineTo(W - pad.r, y); ctx.stroke();
-  }
-
-  // Y labels
-  ctx.fillStyle = '#484f58'; ctx.font = '10px monospace'; ctx.textAlign = 'right';
-  for (let i = 0; i <= 4; i++) {
-    const val = maxVal - (range / 4) * i;
-    ctx.fillText(val.toFixed(1), pad.l - 4, pad.t + (ch / 4) * i + 3);
-  }
-
-  // X labels
-  ctx.textAlign = 'center';
-  for (let i = 0; i < points.length; i += Math.max(1, Math.floor(points.length / 6))) {
-    const x = pad.l + (i / (points.length - 1)) * cw;
-    const d = new Date(points[i].t);
-    ctx.fillText(d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}), x, H - 4);
-  }
-
-  // 1000 baseline
-  const baseY = pad.t + ch - ((1000 - minVal) / range) * ch;
-  ctx.strokeStyle = '#484f5844';
-  ctx.setLineDash([4, 4]);
-  ctx.beginPath(); ctx.moveTo(pad.l, baseY); ctx.lineTo(W - pad.r, baseY); ctx.stroke();
-  ctx.setLineDash([]);
-
-  // Line
-  const last = values[values.length - 1];
-  const color = last >= 1000 ? '#3fb950' : '#f85149';
-
-  ctx.fillStyle = color + '18';
-  ctx.beginPath();
-  ctx.moveTo(pad.l, pad.t + ch);
-  for (let i = 0; i < points.length; i++) {
-    const x = pad.l + (i / (points.length - 1)) * cw;
-    const y = pad.t + ch - ((values[i] - minVal) / range) * ch;
-    ctx.lineTo(x, y);
-  }
-  ctx.lineTo(pad.l + cw, pad.t + ch);
-  ctx.closePath();
-  ctx.fill();
-
-  ctx.strokeStyle = color;
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  for (let i = 0; i < points.length; i++) {
-    const x = pad.l + (i / (points.length - 1)) * cw;
-    const y = pad.t + ch - ((values[i] - minVal) / range) * ch;
-    if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
-  }
-  ctx.stroke();
-}
-
-load();
+  // --- rental table, widest bid discount first ---
+  const rent = gpus.filter(g => g.rent).sort((a, b) => (b.bid_discount_pct || 0) - (a.bid_discount_pct || 0));
+  const maxRate = Math.max(...rent.map(g => g.rent));
+  document.getElementById('rental').innerHTML = `<table>
+    <thead><tr><th>model</th><th>vram</th><th>on-demand</th><th>bid floor</th>
+      <th>discount</th><th>offers</th><th>cheapest at</th></tr></thead>
+    <tbody>${rent.map(g => `<tr>
+      <td class="name-cell">${g.label}</td>
+      <td>${g.vram}GB</td>
+      <td>${rate(g.rent)} <span class="bar" style="width:${Math.max(2, g.rent / maxRate * 60)}px"></span></td>
+      <td>${g.bid ? rate(g.bid) : '—'}</td>
+      <td class="${g.bid_discount_pct ? 'up' : 'flat'}">${g.bid_discount_pct ? '−' + g.bid_discount_pct.toFixed(0) + '%' : '—'}</td>
+      <td>${(g.vast && g.vast.offers) || 0}</td>
+      <td class="sub">${(g.vast && g.vast.cheapest_location) || '—'}</td>
+    </tr>`).join('')}</tbody></table>`;
+}).catch(e => {
+  document.querySelectorAll('.no-data').forEach(n => n.textContent = 'failed to load gpu.json');
+  console.error(e);
+});
 </script>
 </body>
 </html>
