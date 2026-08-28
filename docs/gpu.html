@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GPU Prices — buy vs rent</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: #0a0e17; color: #c9d1d9; font-family: 'SF Mono', 'Cascadia Code', monospace; font-size: 13px; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+  h1 { color: #58a6ff; font-size: 20px; }
+  .subtitle { color: #484f58; font-size: 12px; margin-bottom: 20px; }
+  .updated { color: #484f58; font-size: 11px; position: absolute; top: 20px; right: 20px; }
+  .nav { margin-bottom: 16px; }
+  .nav a { color: #484f58; text-decoration: none; margin-right: 14px; font-size: 11px; }
+  .nav a:hover, .nav a.on { color: #58a6ff; }
+  .section { background: #161b22; border: 1px solid #21262d; border-radius: 8px; padding: 16px; margin-bottom: 16px; }
+  .section h2 { color: #8b949e; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 4px; }
+  .section .hint { color: #484f58; font-size: 11px; margin-bottom: 12px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 8px; margin-bottom: 16px; }
+  .card { background: #161b22; border: 1px solid #21262d; border-radius: 6px; padding: 12px; }
+  .card:hover { border-color: #388bfd; }
+  .model { font-size: 14px; font-weight: bold; color: #58a6ff; }
+  .meta { color: #484f58; font-size: 11px; margin-bottom: 6px; }
+  .price { font-size: 18px; font-weight: bold; }
+  .sub { color: #484f58; font-size: 11px; }
+  .up { color: #3fb950; } .down { color: #f85149; } .flat { color: #484f58; }
+  .tag { display: inline-block; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-top: 6px; }
+  .tier-consumer { background: #3fb950aa; color: #7ee787; }
+  .tier-workstation { background: #d29922aa; color: #e3b341; }
+  .tier-datacenter { background: #1f6febaa; color: #79c0ff; }
+  table { width: 100%; border-collapse: collapse; }
+  th { color: #484f58; font-size: 10px; text-transform: uppercase; letter-spacing: 1px; text-align: right; padding: 4px 8px; border-bottom: 1px solid #21262d; font-weight: normal; }
+  th:first-child, td:first-child { text-align: left; }
+  td { padding: 6px 8px; border-bottom: 1px solid #21262d; text-align: right; }
+  tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #1c2128; }
+  .name-cell { color: #58a6ff; font-weight: bold; }
+  .bar { display: inline-block; height: 6px; background: #1f6feb; border-radius: 2px; vertical-align: middle; }
+  .stats { display: flex; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+  .stat-box { text-align: center; }
+  .stat-val { font-size: 24px; font-weight: bold; color: #58a6ff; }
+  .stat-label { font-size: 11px; color: #484f58; }
+  .no-data { color: #21262d; font-style: italic; padding: 20px; text-align: center; }
+  .footer { text-align: center; color: #21262d; font-size: 11px; margin-top: 30px; }
+  .footer a { color: #484f58; }
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="updated" id="updated"></div>
+  <h1>GPU Prices</h1>
+  <div class="subtitle">what a card costs to buy, what an hour of one costs to rent</div>
+  <div class="nav"><a href="index.html">← Claude-30 Index</a><a href="gpu.html" class="on">GPU Prices</a></div>
+
+  <div class="stats" id="stats"></div>
+
+  <div class="section">
+    <h2>Buy vs Rent</h2>
+    <div class="hint">breakeven = retail ÷ hourly rate. buying wins only past this much use.</div>
+    <div id="breakeven"><div class="no-data">loading…</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Retail</h2>
+    <div class="hint">cheapest in-stock listing on Newegg, against MSRP</div>
+    <div id="retail"><div class="no-data">loading…</div></div>
+  </div>
+
+  <div class="section">
+    <h2>Rental</h2>
+    <div class="hint">on-demand vs the interruptible auction floor across vast.ai and RunPod</div>
+    <div id="rental"><div class="no-data">loading…</div></div>
+  </div>
+
+  <div class="footer">
+    data from vast.ai, RunPod and Newegg ·
+    <a href="https://github.com/we-be/jpow">we-be/jpow</a>
+  </div>
+</div>
+
+<script>
+const money = n => '$' + n.toLocaleString('en-US', {maximumFractionDigits: 0});
+const rate  = n => '$' + n.toFixed(3);
+const cls   = n => n > 0 ? 'down' : n < 0 ? 'up' : 'flat';  // cheaper is good
+const pct   = n => (n > 0 ? '+' : '') + n.toFixed(0) + '%';
+
+fetch('gpu.json').then(r => r.json()).then(d => {
+  const gpus = Object.values(d.gpus);
+  document.getElementById('updated').textContent = 'updated ' + new Date(d.updated).toLocaleString();
+
+  // --- headline stats ---
+  const h100 = d.gpus['H100 SXM'] || {};
+  const c5090 = d.gpus['RTX 5090'] || {};
+  const priced = gpus.filter(g => g.rent).length;
+  const stats = [
+    h100.bid  ? [rate(h100.bid) + '/hr', 'H100 bid floor'] : null,
+    h100.rent ? [rate(h100.rent) + '/hr', 'H100 on-demand'] : null,
+    c5090.retail ? [money(c5090.retail), 'RTX 5090 retail'] : null,
+    c5090.premium_pct != null ? [pct(c5090.premium_pct), '5090 vs MSRP'] : null,
+    [priced + '/' + gpus.length, 'models priced'],
+  ].filter(Boolean);
+  document.getElementById('stats').innerHTML = stats.map(([v, l]) =>
+    `<div class="stat-box"><div class="stat-val">${v}</div><div class="stat-label">${l}</div></div>`).join('');
+
+  // --- buy vs rent ---
+  const be = gpus.filter(g => g.breakeven_hours).sort((a, b) => a.breakeven_hours - b.breakeven_hours);
+  document.getElementById('breakeven').innerHTML = be.length ? `<table>
+    <thead><tr><th>model</th><th>buy</th><th>rent/hr</th><th>bid/hr</th>
+      <th>breakeven</th><th>at bid rate</th></tr></thead>
+    <tbody>${be.map(g => `<tr>
+      <td class="name-cell">${g.label}</td>
+      <td>${money(g.retail)}</td>
+      <td>${rate(g.rent)}</td>
+      <td>${g.bid ? rate(g.bid) : '—'}</td>
+      <td>${g.breakeven_hours.toLocaleString()}h <span class="sub">(${g.breakeven_days.toLocaleString()}d)</span></td>
+      <td>${g.breakeven_hours_bid ? g.breakeven_hours_bid.toLocaleString() + 'h' : '—'}</td>
+    </tr>`).join('')}</tbody></table>` : '<div class="no-data">no overlap between retail and rental</div>';
+
+  // --- retail cards ---
+  const shop = gpus.filter(g => g.retail);
+  document.getElementById('retail').innerHTML = shop.length ? '<div class="grid">' + shop.map(g => `
+    <div class="card">
+      <div class="model">${g.label}</div>
+      <div class="meta">${g.vram}GB · ${g.in_stock} in stock</div>
+      <div class="price">${money(g.retail)}</div>
+      <div class="sub">${g.msrp ? 'MSRP ' + money(g.msrp) : ''}
+        ${g.premium_pct != null ? `<span class="${cls(g.premium_pct)}">${pct(g.premium_pct)}</span>` : ''}</div>
+      <div class="tag tier-${g.tier}">${g.tier}</div>
+    </div>`).join('') + '</div>' : '<div class="no-data">no retail data</div>';
+
+  // --- rental table, widest bid discount first ---
+  const rent = gpus.filter(g => g.rent).sort((a, b) => (b.bid_discount_pct || 0) - (a.bid_discount_pct || 0));
+  const maxRate = Math.max(...rent.map(g => g.rent));
+  document.getElementById('rental').innerHTML = `<table>
+    <thead><tr><th>model</th><th>vram</th><th>on-demand</th><th>bid floor</th>
+      <th>discount</th><th>offers</th><th>cheapest at</th></tr></thead>
+    <tbody>${rent.map(g => `<tr>
+      <td class="name-cell">${g.label}</td>
+      <td>${g.vram}GB</td>
+      <td>${rate(g.rent)} <span class="bar" style="width:${Math.max(2, g.rent / maxRate * 60)}px"></span></td>
+      <td>${g.bid ? rate(g.bid) : '—'}</td>
+      <td class="${g.bid_discount_pct ? 'up' : 'flat'}">${g.bid_discount_pct ? '−' + g.bid_discount_pct.toFixed(0) + '%' : '—'}</td>
+      <td>${(g.vast && g.vast.offers) || 0}</td>
+      <td class="sub">${(g.vast && g.vast.cheapest_location) || '—'}</td>
+    </tr>`).join('')}</tbody></table>`;
+}).catch(e => {
+  document.querySelectorAll('.no-data').forEach(n => n.textContent = 'failed to load gpu.json');
+  console.error(e);
+});
+</script>
+</body>
+</html>
