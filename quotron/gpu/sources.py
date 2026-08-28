@@ -1,5 +1,5 @@
 """
-Price sources. Plain stdlib HTTP — no Shoal, no third-party deps.
+Price sources. Plain stdlib HTTP, no third-party deps.
 
 Three sources survive bare requests:
   vast.ai  — per-offer marketplace; carries min_bid, the interruptible
@@ -9,7 +9,7 @@ Three sources survive bare requests:
              so retail needs no HTML scraping.
 
 eBay (used-market comps) is deliberately absent: it 403s bare curl on TLS
-fingerprint alone. It needs Shoal's tls-client tier or an API key, and it is
+fingerprint alone. It needs a TLS-impersonating client or an API key, and it
 the one source worth adding when either exists.
 """
 

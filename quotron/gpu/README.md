@@ -17,10 +17,10 @@ back after roughly 15,000 hours of continuous use — about 1.7 years.
 | RunPod | rent | none | one GraphQL call prices every type at secure / community / bid |
 | Newegg | buy | none | ships its result set as JSON in `window.__initialState__` |
 
-No Shoal, no pip installs — stdlib `urllib` only.
+No pip installs — stdlib `urllib` only.
 
 eBay used-market comps are deliberately missing: eBay 403s bare requests on
-TLS fingerprint alone. It needs Shoal's tls-client tier or an API key, and
+TLS fingerprint alone. It needs a TLS-impersonating client or an API key, and
 it's the first source worth adding when either exists.
 
 ## Files

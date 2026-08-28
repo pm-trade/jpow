@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # quotron price collection — one tick over every jpow data source.
-# Scrapes GPU retail/rental (and Claude-30 when Shoal is up), commits the
+# Scrapes every available source, commits the
 # outputs once and pushes. History is the whole point of a tracker, so this
 # running on a schedule is what makes the docs/*.json series worth anything.
 set -uo pipefail

@@ -16,7 +16,6 @@ set -uo pipefail
 cd "$(dirname "$0")/.."
 
 INTERVAL="${INTERVAL:-3600}"
-SHOAL_URL="${SHOAL_URL:-http://localhost:8180}"
 
 # source | output | scraper args
 SOURCES=(
@@ -26,19 +25,11 @@ SOURCES=(
 
 log() { echo "[$(date +%H:%M)] $*"; }
 
-# claude30 talks to the world through Shoal; without it there is nothing to run.
-have_shoal() { curl -sf -m 5 "$SHOAL_URL/health" >/dev/null 2>&1; }
-
 scrape_all() {
-    local ok=() failed=() skipped=()
+    local ok=() failed=()
 
     for entry in "${SOURCES[@]}"; do
         IFS='|' read -r name out args <<< "$entry"
-
-        if [ "$name" = "claude30" ] && ! have_shoal; then
-            skipped+=("$name(no shoal)")
-            continue
-        fi
 
         if timeout 300 python3 "quotron/$name/scraper.py" $args --export "$out" >/dev/null 2>&1; then
             ok+=("$name")
@@ -47,7 +38,7 @@ scrape_all() {
         fi
     done
 
-    log "scraped: ${ok[*]:-none}${failed:+ | failed: ${failed[*]}}${skipped:+ | skipped: ${skipped[*]}}"
+    log "scraped: ${ok[*]:-none}${failed:+ | failed: ${failed[*]}}"
     [ ${#ok[@]} -gt 0 ]
 }
 
