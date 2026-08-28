@@ -1,0 +1,12 @@
+[Unit]
+Description=Collect quotron prices hourly
+
+[Timer]
+OnCalendar=hourly
+# The box powers off nightly on purpose — catch up on the next boot rather
+# than leaving a hole in the series.
+Persistent=true
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

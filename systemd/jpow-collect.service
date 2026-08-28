@@ -1,0 +1,10 @@
+[Unit]
+Description=quotron price collection — GPU retail/rental, Claude-30 quotes
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+ExecStart=/home/hunter/.local/bin/jpow-collect.sh
+# Three sources behind a 300s scrape timeout each, plus git — 600s is slack.
+TimeoutStartSec=600

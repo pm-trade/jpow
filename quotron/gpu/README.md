@@ -29,7 +29,9 @@ it's the first source worth adding when either exists.
 - `sources.py` — one adapter per source, all returning plain dicts
 - `scraper.py` — collect, merge, derive breakeven, export `docs/gpu.json`
 - `history.py` — append to `docs/gpu-history.json` (180 days, hourly)
-- `collect.sh` — loop, scrape, commit and push when prices move
+
+Collection and committing live in `quotron/collect.sh`, which runs every
+source and commits once. See `quotron/README.md` for scheduling.
 
 ## Usage
 
@@ -38,8 +40,7 @@ python3 quotron/gpu/scraper.py --all --export docs/gpu.json
 python3 quotron/gpu/scraper.py --cloud        # rental only
 python3 quotron/gpu/scraper.py --retail       # retail only
 
-./quotron/gpu/collect.sh once                 # one pass, commit if changed
-INTERVAL=3600 ./quotron/gpu/collect.sh        # hourly forever
+./quotron/collect.sh                          # all sources, one commit
 ```
 
 ## Gotchas
