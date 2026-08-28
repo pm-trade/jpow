@@ -7,7 +7,6 @@ Services that collect, normalize and distribute public data.
 
 | source | collects | output | needs |
 |---|---|---|---|
-| `claude30` | AI-infra stock quotes, news, social, sentiment | `docs/data.json`, `docs/history.json` | unmet external dep |
 | `gpu` | GPU retail and rental prices, buy-vs-rent breakeven | `docs/gpu.json`, `docs/gpu-history.json` | nothing |
 
 Each source is a directory with a `scraper.py` that takes `--export <path>`
@@ -24,8 +23,7 @@ GitHub Pages is the distribution layer and the commit log is the archive.
 single commit for all of them — per-source scripts each doing their own
 add/commit/push raced the index and fought over the remote. A source that
 fails is reported and skipped, never fatal, so a dead upstream doesn't cost
-us the sources that did work. `claude30` currently fails this way — its
-scraper has an unmet external dependency on this box.
+us the sources that did work.
 
 ```sh
 ./quotron/collect.sh            # one pass

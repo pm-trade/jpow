@@ -20,7 +20,6 @@ INTERVAL="${INTERVAL:-3600}"
 # source | output | scraper args
 SOURCES=(
     "gpu|docs/gpu.json|--all"
-    "claude30|docs/data.json|--quotes"
 )
 
 log() { echo "[$(date +%H:%M)] $*"; }

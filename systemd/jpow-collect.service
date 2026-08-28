@@ -1,5 +1,5 @@
 [Unit]
-Description=quotron price collection — GPU retail/rental, Claude-30 quotes
+Description=quotron price collection — GPU retail and rental prices
 After=network-online.target
 Wants=network-online.target
 
