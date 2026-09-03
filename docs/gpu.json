@@ -1,5 +1,5 @@
 {
-  "updated": "2026-09-02T23:01:19",
+  "updated": "2026-09-03T00:02:39",
   "catalog": {
     "RTX 5090": {
       "label": "GeForce RTX 5090",
@@ -145,7 +145,7 @@
       "vram": 32,
       "msrp": 1999,
       "rent": 0.2129,
-      "bid": 0.1,
+      "bid": 0.105,
       "retail": 4899.99,
       "retail_median": 6196.0,
       "in_stock": 17,
@@ -154,8 +154,8 @@
         "offers": 64,
         "ondemand_min": 0.2129,
         "ondemand_median": 0.4037,
-        "bid_min": 0.1,
-        "bid_median": 0.3867,
+        "bid_min": 0.105,
+        "bid_median": 0.3733,
         "cheapest_location": "South Korea, KR",
         "total_gpus": 88
       },
@@ -168,8 +168,8 @@
       "premium_pct": 145.1,
       "breakeven_hours": 23015,
       "breakeven_days": 959.0,
-      "breakeven_hours_bid": 49000,
-      "bid_discount_pct": 53.0
+      "breakeven_hours_bid": 46667,
+      "bid_discount_pct": 50.7
     },
     "RTX 5080": {
       "model": "RTX 5080",
@@ -178,19 +178,19 @@
       "vram": 16,
       "msrp": 999,
       "rent": 0.1341,
-      "bid": 0.067,
+      "bid": 0.069,
       "retail": 1579.99,
       "retail_median": 1899.99,
       "in_stock": 34,
       "cheapest_listing": "MSI SHADOW GeForce RTX 5080 Graphics Card RTX 5080 16G SHADOW 3X OC",
       "vast": {
-        "offers": 49,
+        "offers": 47,
         "ondemand_min": 0.1341,
-        "ondemand_median": 0.2022,
-        "bid_min": 0.067,
-        "bid_median": 0.1733,
+        "ondemand_median": 0.2134,
+        "bid_min": 0.069,
+        "bid_median": 0.1867,
         "cheapest_location": "Yunnan, CN",
-        "total_gpus": 88
+        "total_gpus": 91
       },
       "runpod": {
         "secure": 0.59,
@@ -201,8 +201,8 @@
       "premium_pct": 58.2,
       "breakeven_hours": 11782,
       "breakeven_days": 490.9,
-      "breakeven_hours_bid": 23582,
-      "bid_discount_pct": 50.0
+      "breakeven_hours_bid": 22898,
+      "bid_discount_pct": 48.5
     },
     "RTX 4090": {
       "model": "RTX 4090",
@@ -210,20 +210,20 @@
       "tier": "consumer",
       "vram": 24,
       "msrp": 1599,
-      "rent": 0.1344,
-      "bid": 0.107,
+      "rent": 0.1363,
+      "bid": 0.12,
       "retail": 2989.99,
       "retail_median": 3699.0,
       "in_stock": 27,
       "cheapest_listing": "ASUS RTX 4090 24GB GDDR6X ROG-STRIX-LC-RTX4090-O24G-GAMING Video Graphics Card",
       "vast": {
-        "offers": 52,
-        "ondemand_min": 0.1344,
-        "ondemand_median": 0.388,
-        "bid_min": 0.107,
-        "bid_median": 0.3,
-        "cheapest_location": ", CN",
-        "total_gpus": 179
+        "offers": 64,
+        "ondemand_min": 0.1363,
+        "ondemand_median": 0.3544,
+        "bid_min": 0.12,
+        "bid_median": 0.2667,
+        "cheapest_location": "Texas, US",
+        "total_gpus": 128
       },
       "runpod": {
         "secure": 0.74,
@@ -232,10 +232,10 @@
         "vram": 24
       },
       "premium_pct": 87.0,
-      "breakeven_hours": 22247,
-      "breakeven_days": 927.0,
-      "breakeven_hours_bid": 27944,
-      "bid_discount_pct": 20.4
+      "breakeven_hours": 21937,
+      "breakeven_days": 914.0,
+      "breakeven_hours_bid": 24917,
+      "bid_discount_pct": 12.0
     },
     "RTX 3090": {
       "model": "RTX 3090",
@@ -252,11 +252,11 @@
       "vast": {
         "offers": 64,
         "ondemand_min": 0.0678,
-        "ondemand_median": 0.1356,
+        "ondemand_median": 0.1409,
         "bid_min": 0.0467,
-        "bid_median": 0.1155,
+        "bid_median": 0.12,
         "cheapest_location": "Argentina, AR",
-        "total_gpus": 120
+        "total_gpus": 113
       },
       "runpod": {
         "secure": 0.5,
@@ -283,13 +283,13 @@
       "in_stock": 6,
       "cheapest_listing": "Dell NVIDIA RTX 6000 ADA 48GB GDDR6 300W PCIe x16 DW FHFL GPU (YMD9W)",
       "vast": {
-        "offers": 9,
+        "offers": 10,
         "ondemand_min": 0.4939,
-        "ondemand_median": 0.6278,
+        "ondemand_median": 0.6275,
         "bid_min": 0.2667,
         "bid_median": 0.4,
         "cheapest_location": "Poland, PL",
-        "total_gpus": 14
+        "total_gpus": 18
       },
       "runpod": {
         "secure": 0.84,
@@ -309,20 +309,20 @@
       "tier": "workstation",
       "vram": 48,
       "msrp": 9000,
-      "rent": 0.4007,
+      "rent": 0.4669,
       "bid": 0.2,
       "retail": 8495.0,
       "retail_median": 11930.0,
       "in_stock": 7,
       "cheapest_listing": "NVIDIA L40S Graphic Card - 48 GB GDDR6 - PCIe 4.0 x16 - 2x Slot - Ada - 900-2G13",
       "vast": {
-        "offers": 16,
-        "ondemand_min": 0.4007,
+        "offers": 15,
+        "ondemand_min": 0.4669,
         "ondemand_median": 0.8004,
         "bid_min": 0.2,
         "bid_median": 0.7733,
-        "cheapest_location": "Texas, US",
-        "total_gpus": 43
+        "cheapest_location": "Japan, JP",
+        "total_gpus": 48
       },
       "runpod": {
         "secure": 0.99,
@@ -331,10 +331,10 @@
         "vram": 48
       },
       "premium_pct": -5.6,
-      "breakeven_hours": 21200,
-      "breakeven_days": 883.3,
+      "breakeven_hours": 18194,
+      "breakeven_days": 758.1,
       "breakeven_hours_bid": 42475,
-      "bid_discount_pct": 50.1
+      "bid_discount_pct": 57.2
     },
     "H100 SXM": {
       "model": "H100 SXM",
@@ -349,13 +349,13 @@
       "in_stock": 0,
       "cheapest_listing": null,
       "vast": {
-        "offers": 16,
+        "offers": 20,
         "ondemand_min": 1.3356,
-        "ondemand_median": 2.3878,
+        "ondemand_median": 2.3889,
         "bid_min": 0.44,
-        "bid_median": 1.2667,
+        "bid_median": 1.2333,
         "cheapest_location": "Moldova, MD",
-        "total_gpus": 25
+        "total_gpus": 37
       },
       "runpod": {
         "secure": 3.29,
@@ -380,9 +380,9 @@
       "vast": {
         "offers": 4,
         "ondemand_min": 1.8689,
-        "ondemand_median": 2.6699,
+        "ondemand_median": 2.6622,
         "bid_min": 0.4,
-        "bid_median": 1.2,
+        "bid_median": 1.2667,
         "cheapest_location": "Iowa, US",
         "total_gpus": 4
       },
@@ -407,13 +407,13 @@
       "in_stock": 0,
       "cheapest_listing": null,
       "vast": {
-        "offers": 17,
-        "ondemand_min": 3.9476,
-        "ondemand_median": 4.5361,
+        "offers": 12,
+        "ondemand_min": 3.9477,
+        "ondemand_median": 4.5709,
         "bid_min": 2.6316,
-        "bid_median": 3.9474,
+        "bid_median": 4.0923,
         "cheapest_location": "Italy, IT",
-        "total_gpus": 62
+        "total_gpus": 42
       },
       "runpod": {
         "secure": 4.59,
@@ -436,13 +436,13 @@
       "in_stock": 0,
       "cheapest_listing": null,
       "vast": {
-        "offers": 13,
+        "offers": 14,
         "ondemand_min": 5.3135,
-        "ondemand_median": 7.5104,
+        "ondemand_median": 7.5078,
         "bid_min": 5.0,
         "bid_median": 6.25,
         "cheapest_location": "Oregon, US",
-        "total_gpus": 24
+        "total_gpus": 28
       },
       "runpod": {
         "secure": 6.79,
@@ -465,13 +465,13 @@
       "in_stock": 0,
       "cheapest_listing": null,
       "vast": {
-        "offers": 28,
+        "offers": 27,
         "ondemand_min": 0.2669,
-        "ondemand_median": 0.8495,
+        "ondemand_median": 0.8341,
         "bid_min": 0.1299,
-        "bid_median": 0.6133,
+        "bid_median": 0.6667,
         "cheapest_location": "Quebec, CA",
-        "total_gpus": 54
+        "total_gpus": 50
       },
       "runpod": {
         "secure": 1.59,
@@ -494,13 +494,13 @@
       "in_stock": 0,
       "cheapest_listing": null,
       "vast": {
-        "offers": 14,
+        "offers": 18,
         "ondemand_min": 0.2674,
-        "ondemand_median": 0.6887,
+        "ondemand_median": 0.7106,
         "bid_min": 0.1293,
-        "bid_median": 0.2,
+        "bid_median": 0.2667,
         "cheapest_location": "Florida, US",
-        "total_gpus": 31
+        "total_gpus": 40
       },
       "runpod": {
         "secure": 1.39,
@@ -512,7 +512,7 @@
     }
   },
   "history_summary": {
-    "points": 87,
+    "points": 88,
     "since": "2026-08-27T22:16:15",
     "models": {
       "RTX 5090": {
@@ -520,45 +520,45 @@
         "rent_change_pct": -33.7,
         "rent_low": 0.2129,
         "rent_high": 0.3341,
-        "bid": 0.1,
-        "bid_change_pct": -50.0,
+        "bid": 0.105,
+        "bid_change_pct": -47.5,
         "bid_low": 0.08,
         "bid_high": 0.2667,
         "retail": 4899.99,
         "retail_change_pct": 0.0,
         "retail_low": 4899.99,
         "retail_high": 4899.99,
-        "observations": 87
+        "observations": 88
       },
       "RTX 5080": {
         "rent": 0.1341,
         "rent_change_pct": 0.0,
         "rent_low": 0.1341,
         "rent_high": 0.1621,
-        "bid": 0.067,
-        "bid_change_pct": -16.25,
+        "bid": 0.069,
+        "bid_change_pct": -13.75,
         "bid_low": 0.0533,
         "bid_high": 0.1013,
         "retail": 1579.99,
         "retail_change_pct": 0.0,
         "retail_low": 1499.99,
         "retail_high": 1579.99,
-        "observations": 87
+        "observations": 88
       },
       "RTX 4090": {
-        "rent": 0.1344,
-        "rent_change_pct": 11.81,
+        "rent": 0.1363,
+        "rent_change_pct": 13.39,
         "rent_low": 0.1134,
         "rent_high": 0.2237,
-        "bid": 0.107,
-        "bid_change_pct": 129.12,
+        "bid": 0.12,
+        "bid_change_pct": 156.96,
         "bid_low": 0.017,
         "bid_high": 0.163,
         "retail": 2989.99,
         "retail_change_pct": 213.42,
         "retail_low": 954.0,
         "retail_high": 2989.99,
-        "observations": 87
+        "observations": 88
       },
       "RTX 3090": {
         "rent": 0.0678,
@@ -573,7 +573,7 @@
         "retail_change_pct": 226.09,
         "retail_low": 459.99,
         "retail_high": 1749.0,
-        "observations": 87
+        "observations": 88
       },
       "RTX 6000 Ada": {
         "rent": 0.4939,
@@ -588,11 +588,11 @@
         "retail_change_pct": 2718.35,
         "retail_low": 212.5,
         "retail_high": 5999.0,
-        "observations": 87
+        "observations": 88
       },
       "L40S": {
-        "rent": 0.4007,
-        "rent_change_pct": 0.0,
+        "rent": 0.4669,
+        "rent_change_pct": 16.52,
         "rent_low": 0.4004,
         "rent_high": 0.4669,
         "bid": 0.2,
@@ -603,7 +603,7 @@
         "retail_change_pct": 0.0,
         "retail_low": 8495.0,
         "retail_high": 8495.0,
-        "observations": 87
+        "observations": 88
       },
       "H100 SXM": {
         "rent": 1.3356,
@@ -614,7 +614,7 @@
         "bid_change_pct": 230.08,
         "bid_low": 0.1333,
         "bid_high": 0.4953,
-        "observations": 87
+        "observations": 88
       },
       "H100 NVL": {
         "rent": 1.8689,
@@ -625,7 +625,7 @@
         "bid_change_pct": 0.0,
         "bid_low": 0.4,
         "bid_high": 1.2,
-        "observations": 87
+        "observations": 88
       },
       "H200": {
         "rent": 3.59,
@@ -636,7 +636,7 @@
         "bid_change_pct": 36.06,
         "bid_low": 0.462,
         "bid_high": 3.59,
-        "observations": 87
+        "observations": 88
       },
       "B200": {
         "rent": 5.3135,
@@ -647,7 +647,7 @@
         "bid_change_pct": 67.36,
         "bid_low": 2.9875,
         "bid_high": 5.0,
-        "observations": 87
+        "observations": 88
       },
       "A100 SXM": {
         "rent": 0.2669,
@@ -658,7 +658,7 @@
         "bid_change_pct": 0.0,
         "bid_low": 0.1299,
         "bid_high": 1.39,
-        "observations": 87
+        "observations": 88
       },
       "A100 PCIe": {
         "rent": 0.2674,
@@ -669,7 +669,7 @@
         "bid_change_pct": -3.0,
         "bid_low": 0.1293,
         "bid_high": 0.1481,
-        "observations": 87
+        "observations": 88
       }
     }
   }
